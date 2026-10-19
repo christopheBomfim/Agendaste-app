@@ -1,0 +1,7 @@
+{
+  "name": "Agendaste",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
