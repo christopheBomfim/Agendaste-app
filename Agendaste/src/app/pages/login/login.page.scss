@@ -1,0 +1,160 @@
+.pagina-login {
+    --background: #f7f8fc;
+}
+
+.login-container {
+    min-height: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 40px 24px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+// Identidade visual
+
+.cabecalho {
+    text-align: center;
+    margin-bottom: 45px;
+
+    .logo {
+        width: 70px;
+        height: 70px;
+        border-radius: 20px;
+        background: #cf25dc;
+        color: white;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin: 0 auto 20px;
+
+        ion-icon {
+            font-size: 36px;
+        }
+    }
+
+    h1 {
+        font-size: 32px;
+        font-weight: 800;
+        color: #171b2c;
+        margin: 0;
+    }
+
+    p {
+        font-size: 15px;
+        color: #707787;
+        margin-top: 8px;
+    }
+}
+
+/* Organização dos campos do formulário */
+
+.campo-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #252a3a;
+        margin-left: 2px;
+    }
+
+    ion-input {
+        --background: #ffffff;
+
+        // Cor do texto digitado
+        --color: #252a3a;
+
+        // Cor do placeholder
+        --placeholder-color: #9399a5;
+        --placeholder-opacity: 1;
+
+        // Aparência das bordas
+        --border-color: #dcdfe6;
+        --border-radius: 12px;
+
+        // Cor quando o campo recebe foco
+        --highlight-color-focused: #cf25dc;
+
+        --highlight-color-valid: #cf25dc;
+
+        font-size: 15px;
+    }
+}
+
+
+// Recuperação de senha
+
+.esqueci-senha {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -12px;
+
+    ion-button {
+        --color: #cf25dc;
+        font-size: 13px;
+        text-transform: none;
+    }
+}
+
+// Botão principal
+
+.botao-entrar {
+    --background: #cf25dc;
+    --background-activated: #ac1ab8;
+    --color: #ffffff;
+    --border-radius: 12px;
+
+    height: 52px;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: none;
+}
+
+// Separador
+
+.separador {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 24px 0;
+    color: #9298a5;
+
+    &::before,
+    &::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: #e0e3ea;
+    }
+}
+
+// Botões secundários
+
+.botao-secundario {
+    --border-color: #cf25dc;
+    --color: #cf25dc;
+    --border-radius: 12px;
+    --border-width: 1px;
+
+    height: 52px;
+    font-weight: 600;
+    text-transform: none;
+}
+
+.botao-cadastro {
+    --border-color: #cf25dc;
+    --color: #cf25dc;
+    --border-radius: 12px;
+    --border-width: 1px;
+
+    height: 52px;
+    font-weight: 600;
+    text-transform: none;
+}

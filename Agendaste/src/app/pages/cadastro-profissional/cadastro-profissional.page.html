@@ -1,0 +1,142 @@
+
+<ion-header class="cabecalho-cadastro">
+  <ion-toolbar>
+
+    <div class="barra-superior">
+
+      <!-- Botão circular de voltar -->
+      <ion-button
+        class="botao-voltar"
+        (click)="voltar()"
+        aria-label="Voltar">
+
+        <ion-icon
+          slot="icon-only"
+          name="arrow-back-outline">
+        </ion-icon>
+
+      </ion-button>
+
+      <!-- Título ao lado da seta -->
+      <span class="titulo-pagina">
+        Cadastro Profissional
+      </span>
+
+    </div>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="pagina-cadastro">
+
+  <div class="cadastro-container">
+
+    <div class="introducao">
+      <h2>Crie sua conta profissional</h2>
+      <p>Preencha seus dados para começar a atender.</p>
+    </div>
+
+    <form (ngSubmit)="criarConta()" class="formulario">
+
+      <!-- Nome completo -->
+      <div class="campo-formulario">
+        <label for="nome">Nome completo</label>
+
+        <ion-input id="nome" aria-label="Nome completo" fill="outline" type="text" placeholder="Seu nome"
+          autocomplete="name" name="nome" [(ngModel)]="nome">
+        </ion-input>
+      </div>
+
+      <!-- E-mail -->
+      <div class="campo-formulario">
+        <label for="email">E-mail</label>
+
+        <ion-input id="email" aria-label="E-mail" fill="outline" type="email" placeholder="exemplo@email.com"
+          autocomplete="email" name="email" [(ngModel)]="email">
+        </ion-input>
+      </div>
+
+      <!-- Celular -->
+      <div class="campo-formulario">
+        <label for="celular">Celular</label>
+
+        <ion-input id="celular" aria-label="Celular" fill="outline" type="tel" placeholder="(31) 99999-9999"
+          autocomplete="tel" name="celular" [(ngModel)]="celular">
+        </ion-input>
+      </div>
+
+      <!-- Profissão -->
+      <div class="campo-formulario">
+        <label for="profissao">Profissão</label>
+
+        <ion-select id="profissao" aria-label="Profissão" fill="outline" interface="popover"
+          placeholder="Selecione sua profissão" name="profissao" [(ngModel)]="profissao">
+
+          <ion-select-option value="medico">
+            Médico(a)
+          </ion-select-option>
+
+          <ion-select-option value="dentista">
+            Dentista
+          </ion-select-option>
+
+          <ion-select-option value="psicologo">
+            Psicólogo(a)
+          </ion-select-option>
+
+          <ion-select-option value="fisioterapeuta">
+            Fisioterapeuta
+          </ion-select-option>
+
+          <ion-select-option value="nutricionista">
+            Nutricionista
+          </ion-select-option>
+
+          <ion-select-option value="outro">
+            Outro
+          </ion-select-option>
+
+        </ion-select>
+      </div>
+
+      <!-- Especialidade -->
+      <div class="campo-formulario">
+        <label for="especialidade">Especialidade</label>
+
+        <ion-input id="especialidade" aria-label="Especialidade" fill="outline" type="text"
+          placeholder="Ex: Cardiologia, Ortopedia..." name="especialidade" [(ngModel)]="especialidade">
+        </ion-input>
+      </div>
+
+      <!-- Senha -->
+      <div class="campo-formulario">
+        <label for="senha">Senha</label>
+
+        <ion-input id="senha" aria-label="Senha" fill="outline" type="password" placeholder="Mínimo 8 caracteres"
+          name="senha" [(ngModel)]="senha">
+
+          <ion-input-password-toggle slot="end">
+          </ion-input-password-toggle>
+
+        </ion-input>
+      </div>
+
+      <!-- Criar conta -->
+      <ion-button class="botao-criar" expand="block" type="submit">
+        Criar conta profissional
+      </ion-button>
+
+      <!-- Voltar ao login -->
+      <ion-button class="botao-login" expand="block" fill="clear" type="button" (click)="voltar()">
+        Já tem conta? Entrar
+      </ion-button>
+
+    </form>
+
+  </div>
+
+  <ion-toast [isOpen]="toastAberto" [message]="mensagem" [duration]="2500" (didDismiss)="toastAberto = false">
+  </ion-toast>
+
+</ion-content>

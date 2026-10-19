@@ -1,0 +1,75 @@
+<ion-content [fullscreen]="true" class="pagina-login">
+
+  <div class="login-container">
+
+    <!-- Identidade do aplicativo -->
+    <div class="cabecalho">
+      <div class="logo">
+       <ion-icon name="calendar-number-outline"></ion-icon>
+      </div>
+
+      <h1>Agendaste?</h1>
+      <p>Seu tempo sob controle</p>
+    </div>
+
+    <!-- Formulário de login -->
+    <form (ngSubmit)="entrar()" class="formulario">
+
+      <!-- Campo de E-mail -->
+      <div class="campo-formulario">
+        <label for="email">E-mail</label>
+
+        <ion-input id="email" aria-label="E-mail" fill="outline" type="email" placeholder="exemplo@email.com"
+          autocomplete="email" name="email" [(ngModel)]="email">
+        </ion-input>
+      </div>
+
+      <!-- Campo de Senha -->
+      <div class="campo-formulario">
+        <label for="senha">Senha</label>
+
+        <ion-input id="senha" aria-label="Senha" fill="outline" type="password" placeholder="Sua senha de acesso"
+          name="senha" [(ngModel)]="senha">
+
+          <ion-input-password-toggle slot="end">
+          </ion-input-password-toggle>
+
+        </ion-input>
+      </div>
+
+      <!-- Recuperação de senha -->
+      <div class="esqueci-senha">
+        <ion-button type="button" fill="clear" (click)="recuperarSenha()">
+          Esqueci minha senha
+        </ion-button>
+      </div>
+
+      <!-- Botão de login -->
+      <ion-button class="botao-entrar" expand="block" type="submit">
+        Entrar
+      </ion-button>
+
+    </form>
+
+    <!-- Separador -->
+    <div class="separador">
+      <span>ou</span>
+    </div>
+
+    <!-- Acesso do cliente -->
+    <ion-button class="botao-secundario" expand="block" fill="outline" (click)="consultarAgendamentos()">
+      Consultar meus agendamentos
+    </ion-button>
+
+    <!-- Cadastro profissional -->
+    <ion-button class="botao-cadastro" expand="block" fill="outline" (click)="cadastrarProfissional()">
+      Criar conta profissional
+    </ion-button>
+
+  </div>
+
+  <!-- Mensagens -->
+  <ion-toast [isOpen]="toastAberto" [message]="mensagem" [duration]="2500" (didDismiss)="toastAberto = false">
+  </ion-toast>
+
+</ion-content>

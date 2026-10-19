@@ -1,0 +1,188 @@
+/* Cabeçalho da página */
+ion-header.cabecalho-cadastro {
+  box-shadow: none !important;
+  border: none !important;
+
+  &::after {
+    display: none !important;
+    background-image: none !important;
+  }
+
+  ion-toolbar:last-of-type {
+    --background: #f7f8fc;
+    --border-width: 0 !important;
+    --border-color: transparent;
+    --box-shadow: none;
+
+    box-shadow: none;
+    border: none;
+
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+  }
+
+  .barra-superior {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* Botão circular */
+
+  .botao-voltar {
+    width: 40px;
+    height: 40px;
+    margin: 0;
+
+    --background: #ffffff;
+    --color: #171b2c;
+
+    --border-radius: 50%;
+    --border-color: #dce2ea;
+    --border-style: solid;
+    --border-width: 1px;
+
+    --box-shadow: none;
+
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-top: 0;
+    --padding-bottom: 0;
+
+    ion-icon {
+      font-size: 20px;
+    }
+  }
+
+  /* Título */
+
+  .titulo-pagina {
+    font-size: 17px;
+    font-weight: 700;
+    color: #171b2c;
+  }
+}
+
+/* Conteúdo */
+
+.pagina-cadastro {
+  --background: #f7f8fc;
+}
+
+.cadastro-container {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 24px;
+  padding-bottom: 40px;
+}
+
+/* Introdução */
+
+.introducao {
+  margin-bottom: 30px;
+
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #252a3a;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 14px;
+    color: #707787;
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+/* Formulário */
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Campos */
+
+.campo-formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #252a3a;
+    margin-left: 2px;
+  }
+
+  ion-input,
+  ion-select {
+    --background: #ffffff;
+    --color: #252a3a;
+
+    --placeholder-color: #9399a5;
+    --placeholder-opacity: 1;
+
+    --border-color: #dcdfe6;
+    --border-radius: 12px;
+
+    --highlight-color-focused: #cf25dc;
+    --highlight-color-valid: #cf25dc;
+
+    font-size: 15px;
+  }
+
+  /* Correção da cor do ion-select */
+
+  ion-select {
+    color: #252a3a;
+  }
+
+  /* Texto da profissão selecionada */
+  ion-select::part(text) {
+    color: #252a3a;
+  }
+
+  /* Texto antes de selecionar */
+  ion-select::part(placeholder) {
+    color: #9399a5;
+    opacity: 1;
+  }
+
+  /* Ícone da seta */
+  ion-select::part(icon) {
+    color: #707787;
+    opacity: 1;
+  }
+}
+
+/* Botão de cadastro */
+
+.botao-criar {
+  --background: #cf25dc;
+  --background-activated: #ac1ab8;
+  --color: #ffffff;
+  --border-radius: 12px;
+
+  height: 52px;
+  margin-top: 12px;
+
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: none;
+}
+
+/* Botão de login */
+
+.botao-login {
+  --color: #cf25dc;
+
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: none;
+}
