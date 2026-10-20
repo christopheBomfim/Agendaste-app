@@ -1,0 +1,86 @@
+<ion-content class="pagina-novo-cliente">
+
+  <div class="cadastro-container">
+
+    <!-- Cabeçalho -->
+    <div class="cabecalho">
+
+      <ion-button class="botao-voltar" type="button" aria-label="Voltar para clientes" (click)="voltar()">
+
+        <ion-icon name="arrow-back-outline" slot="icon-only">
+        </ion-icon>
+
+      </ion-button>
+
+      <h1>Novo Cliente</h1>
+
+    </div>
+
+    <!-- Formulário -->
+    <form class="formulario" (ngSubmit)="salvarCliente()">
+
+      <!-- Nome completo -->
+      <div class="campo-formulario">
+        <label for="nome">Nome completo</label>
+
+        <ion-input id="nome" aria-label="Nome completo" fill="outline" type="text" placeholder="Ex: Maria Oliveira"
+          autocomplete="name" name="nome" [(ngModel)]="nome">
+        </ion-input>
+      </div>
+
+      <!-- E-mail -->
+      <div class="campo-formulario">
+        <label for="email">E-mail</label>
+
+        <ion-input id="email" aria-label="E-mail" fill="outline" type="email" placeholder="maria@email.com"
+          autocomplete="email" name="email" [(ngModel)]="email">
+        </ion-input>
+      </div>
+
+      <!-- Telefone -->
+      <div class="campo-formulario">
+        <label for="telefone">Telefone</label>
+
+        <ion-input id="telefone" aria-label="Telefone" fill="outline" type="tel" placeholder="(31) 98888-8888"
+          autocomplete="tel" name="telefone" [(ngModel)]="telefone">
+        </ion-input>
+      </div>
+
+      <!-- Data de nascimento -->
+      <div class="campo-formulario">
+        <label for="dataNascimento">
+          Data de nascimento
+        </label>
+
+        <ion-input id="dataNascimento" aria-label="Data de nascimento" fill="outline" type="text" inputmode="numeric"
+          maxlength="10" placeholder="DD/MM/AAAA" name="dataNascimento" [(ngModel)]="dataNascimento"
+          (ionInput)="formatarDataNascimento($event)">
+        </ion-input>
+      </div>
+
+      <!-- Observações -->
+      <div class="campo-formulario">
+        <label for="observacoes">Observações</label>
+
+        <ion-textarea id="observacoes" aria-label="Observações" fill="outline"
+          placeholder="Informações importantes sobre o atendimento..." name="observacoes" [rows]="4" [autoGrow]="true"
+          [(ngModel)]="observacoes">
+        </ion-textarea>
+      </div>
+
+      <!-- Salvar Cliente -->
+      <ion-button class="botao-salvar" expand="block" type="submit">
+
+        Salvar Cliente
+
+      </ion-button>
+
+    </form>
+
+  </div>
+
+</ion-content>
+
+<!-- Mensagens de validação -->
+<ion-toast [isOpen]="toastAberto" [message]="mensagem" [duration]="2500" (didDismiss)="toastAberto = false">
+</ion-toast>

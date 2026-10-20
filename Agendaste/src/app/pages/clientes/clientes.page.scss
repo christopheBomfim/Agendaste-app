@@ -1,0 +1,319 @@
+/* ==========================================
+   CONTEÚDO
+========================================== */
+
+.pagina-clientes {
+  --background: #f7f8fc;
+  --color: #171b2c;
+}
+
+.clientes-container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.titulo-clientes {
+  font-size: 21px;
+  font-weight: 800;
+  color: #171b2c;
+
+  margin: 0 0 24px;
+  padding: 0;
+}
+
+/* ==========================================
+   PESQUISA
+========================================== */
+
+.busca-container {
+  background: #ffffff;
+  border: 1px solid #e0e5ed;
+  border-radius: 14px;
+
+  overflow: hidden;
+  margin-bottom: 20px;
+
+  ion-searchbar {
+    padding: 0;
+
+    --background: #ffffff;
+    --color: #252a3a;
+
+    --placeholder-color: #9399a5;
+    --icon-color: #9399a5;
+    --clear-button-color: #707787;
+
+    --box-shadow: none;
+    --border-radius: 14px;
+
+    font-size: 15px;
+  }
+}
+
+/* ==========================================
+   LISTA DE CLIENTES
+========================================== */
+
+.lista-clientes {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Cartões */
+
+.cliente-card {
+  --background: #ffffff;
+  --color: #171b2c;
+
+  --border-radius: 16px;
+  --padding-start: 18px;
+  --inner-padding-end: 16px;
+  --min-height: 88px;
+
+  --background-activated: #f9eafa;
+
+  border: 1px solid #e0e5ed;
+  border-radius: 16px;
+
+  overflow: hidden;
+}
+
+/* ==========================================
+   AVATARES
+========================================== */
+
+.avatar-cliente {
+  width: 48px;
+  height: 48px;
+
+  margin-right: 12px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .iniciais {
+    font-size: 15px;
+    font-weight: 700;
+    color: #171b2c;
+  }
+}
+
+.avatar-azul {
+  background: #e2f2ff;
+}
+
+.avatar-rosa {
+  background: #fde5e5;
+}
+
+.avatar-verde {
+  background: #dcfce7;
+}
+
+.avatar-amarelo {
+  background: #fef9c3;
+}
+
+/* ==========================================
+   INFORMAÇÕES DO CLIENTE
+========================================== */
+
+.cliente-info {
+  min-width: 0;
+
+  h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #171b2c;
+    margin: 0 0 6px;
+  }
+
+  p {
+    font-size: 13px;
+    color: #707787;
+    margin: 0;
+  }
+}
+
+/* Última visita */
+
+.ultima-visita {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-end;
+  justify-content: center;
+
+  text-align: right;
+  white-space: nowrap;
+
+  span {
+    font-size: 11px;
+    color: #9399a5;
+    margin-bottom: 5px;
+  }
+
+  strong {
+    font-size: 13px;
+    font-weight: 500;
+    color: #525d70;
+  }
+}
+
+/* ==========================================
+   NENHUM RESULTADO
+========================================== */
+
+.sem-resultados {
+  text-align: center;
+  padding: 48px 16px;
+
+  ion-icon {
+    font-size: 42px;
+    color: #9399a5;
+    margin-bottom: 12px;
+  }
+
+  h3 {
+    font-size: 17px;
+    color: #171b2c;
+    margin: 0 0 8px;
+  }
+
+  p {
+    font-size: 13px;
+    color: #707787;
+    margin: 0;
+  }
+}
+
+/* ==========================================
+   RODAPÉ SEM LINHAS E SOMBRAS
+========================================== */
+
+ion-footer.rodape-clientes {
+  background: #f7f8fc;
+
+  border: none !important;
+  box-shadow: none !important;
+
+  /* Remove a linha superior e sombras */
+  &::before,
+  &::after {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+    box-shadow: none !important;
+  }
+
+  ion-toolbar {
+    --background: #f7f8fc;
+
+    --border-width: 0;
+    --border-color: transparent;
+    --border-style: none;
+
+    --padding-top: 10px;
+    --padding-bottom: 16px;
+
+    background: #f7f8fc;
+
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Conteúdo do rodapé */
+
+.rodape-conteudo {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ==========================================
+   BOTÃO NOVO CLIENTE
+========================================== */
+
+ion-button.botao-novo-cliente {
+  --background: #cf25dc;
+  --background-activated: #ac1ab8;
+
+  --color: #ffffff;
+  --color-hover: #ffffff;
+  --color-activated: #ffffff;
+
+  --border-radius: 12px;
+  --border-width: 0;
+  --box-shadow: none;
+
+  height: 54px;
+  margin: 0;
+
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: none;
+
+  /* Texto branco */
+  &::part(native) {
+    color: #ffffff !important;
+    border: none;
+    box-shadow: none;
+  }
+
+  /* Ícone branco */
+  ion-icon {
+    color: #ffffff;
+    font-size: 23px;
+  }
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+========================================== */
+
+@media (max-width: 360px) {
+
+  .clientes-container {
+    padding: 14px;
+  }
+
+  .rodape-conteudo {
+    padding: 0 14px;
+  }
+
+  .cliente-card {
+    --padding-start: 10px;
+    --inner-padding-end: 10px;
+  }
+
+  .avatar-cliente {
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+  }
+
+  .cliente-info {
+    h2 {
+      font-size: 14px;
+    }
+
+    p {
+      font-size: 11px;
+    }
+  }
+
+  .ultima-visita {
+    span {
+      font-size: 10px;
+    }
+
+    strong {
+      font-size: 11px;
+    }
+  }
+}

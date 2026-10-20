@@ -1,0 +1,347 @@
+/* ==========================================
+   CONTEÚDO
+========================================== */
+
+.pagina-agendar {
+    --background: #f7f8fc;
+    --color: #171b2c;
+}
+
+.agendar-container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 28px 20px 32px;
+}
+
+/* ==========================================
+   CABEÇALHO
+========================================== */
+
+.cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    margin-bottom: 32px;
+
+    h1 {
+        font-size: 19px;
+        font-weight: 700;
+        color: #171b2c;
+        margin: 0;
+    }
+}
+
+.botao-voltar {
+    width: 42px;
+    height: 42px;
+    margin: 0;
+
+    --background: #ffffff;
+    --color: #171b2c;
+
+    --border-radius: 50%;
+    --border-color: #dce2ea;
+    --border-style: solid;
+    --border-width: 1px;
+
+    --box-shadow: none;
+
+    --padding-start: 0;
+    --padding-end: 0;
+
+    ion-icon {
+        font-size: 20px;
+    }
+}
+
+/* ==========================================
+   CAMPO CLIENTE
+========================================== */
+
+.campo-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    margin-bottom: 30px;
+
+    label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #252a3a;
+    }
+
+    ion-select {
+        --background: #ffffff;
+        --color: #252a3a;
+
+        --placeholder-color: #9399a5;
+        --placeholder-opacity: 1;
+
+        --border-color: #dcdfe6;
+        --border-radius: 12px;
+
+        --highlight-color-focused: #cf25dc;
+        --highlight-color-valid: #cf25dc;
+
+        color: #252a3a;
+        font-size: 15px;
+    }
+
+    ion-select::part(text) {
+        color: #252a3a;
+    }
+
+    ion-select::part(placeholder) {
+        color: #9399a5;
+        opacity: 1;
+    }
+
+    ion-select::part(icon) {
+        color: #707787;
+        opacity: 1;
+    }
+}
+
+/* ==========================================
+   SEÇÕES
+========================================== */
+
+.secao-servico,
+.secao-data,
+.secao-horarios {
+    margin-bottom: 30px;
+
+    h2 {
+        font-size: 16px;
+        font-weight: 700;
+        color: #171b2c;
+        margin: 0 0 16px;
+    }
+}
+
+/* ==========================================
+   TIPOS DE SERVIÇO
+========================================== */
+
+.tipos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.botao-tipo {
+    --background: #ffffff;
+    --color: #525d70;
+    --border-color: #dce2ea;
+    --border-width: 1px;
+    --border-radius: 12px;
+    --box-shadow: none;
+
+    height: 48px;
+    margin: 0;
+
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: none;
+
+    &.selecionado {
+        --background: #fbedfe;
+        --color: #cf25dc;
+        --border-color: #cf25dc;
+        --border-width: 2px;
+    }
+}
+
+/* ==========================================
+   CALENDÁRIO
+========================================== */
+
+.titulo-data {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 16px;
+
+    h2 {
+        margin: 0;
+        flex-shrink: 0;
+    }
+}
+
+.navegacao-datas {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+
+    span {
+        color: #707787;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: capitalize;
+        text-align: center;
+    }
+
+    ion-button {
+        --color: #cf25dc;
+        --padding-start: 3px;
+        --padding-end: 3px;
+
+        min-width: 28px;
+        margin: 0;
+
+        ion-icon {
+            font-size: 17px;
+        }
+    }
+}
+
+.dias-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.botao-dia {
+    --background: #ffffff;
+    --color: #525d70;
+    --border-radius: 12px;
+    --box-shadow: none;
+
+    height: 74px;
+    margin: 0;
+
+    &::part(native) {
+        padding: 0;
+        border: 1px solid #dce2ea;
+    }
+
+    &.selecionado {
+        --background: #fbedfe;
+        --color: #cf25dc;
+
+        &::part(native) {
+            border: 2px solid #cf25dc;
+        }
+    }
+}
+
+.conteudo-dia {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    span {
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    strong {
+        font-size: 20px;
+        font-weight: 700;
+    }
+}
+
+/* ==========================================
+   HORÁRIOS
+========================================== */
+
+.horarios-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.botao-horario {
+    --background: #ffffff;
+    --color: #525d70;
+    --border-color: #dce2ea;
+    --border-width: 1px;
+    --border-radius: 12px;
+
+    --box-shadow: none;
+
+    height: 48px;
+    margin: 0;
+
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: none;
+
+    &.selecionado {
+        --background: #fbedfe;
+        --color: #cf25dc;
+        --border-color: #cf25dc;
+        --border-width: 2px;
+    }
+
+    &[disabled] {
+        --background: #e9ebef;
+        --color: #a3a8b1;
+        opacity: 0.75;
+    }
+}
+
+/* ==========================================
+   BOTÃO CONFIRMAR
+========================================== */
+
+ion-button.botao-confirmar {
+    --background: #cf25dc;
+    --background-activated: #ac1ab8;
+
+    --color: #ffffff;
+    --color-hover: #ffffff;
+    --color-activated: #ffffff;
+
+    --border-radius: 12px;
+    --box-shadow: none;
+
+    height: 54px;
+    margin-top: 38px;
+
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: none;
+
+    &::part(native) {
+        color: #ffffff;
+    }
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+========================================== */
+
+@media (max-width: 360px) {
+
+    .agendar-container {
+        padding: 22px 14px 28px;
+    }
+
+    .tipos-grid,
+    .horarios-grid {
+        gap: 7px;
+    }
+
+    .botao-tipo {
+        font-size: 12px;
+    }
+
+    .dias-grid {
+        gap: 5px;
+    }
+
+    .conteudo-dia {
+        strong {
+            font-size: 18px;
+        }
+    }
+
+    .navegacao-datas span {
+        font-size: 11px;
+    }
+}

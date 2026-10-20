@@ -1,0 +1,147 @@
+<ion-content class="pagina-agendar">
+
+  <div class="agendar-container">
+
+    <!-- Cabeçalho -->
+    <div class="cabecalho">
+
+      <ion-button class="botao-voltar" aria-label="Voltar" (click)="voltar()">
+
+        <ion-icon name="arrow-back-outline" slot="icon-only">
+        </ion-icon>
+
+      </ion-button>
+
+      <h1>Novo Agendamento</h1>
+
+    </div>
+
+    <!-- Selecionar cliente -->
+    <div class="campo-formulario">
+
+      <label for="cliente">Buscar Cliente</label>
+
+      <ion-select id="cliente" aria-label="Buscar Cliente" fill="outline" interface="popover"
+        placeholder="Selecione o cliente..." [(ngModel)]="clienteSelecionado">
+
+        @for (cliente of clientes; track cliente.id) {
+
+        <ion-select-option [value]="cliente.id">
+          {{ cliente.nome }}
+        </ion-select-option>
+
+        }
+
+      </ion-select>
+
+    </div>
+
+    <!-- Tipo de serviço -->
+    <section class="secao-servico">
+
+      <h2>Tipo de Serviço</h2>
+
+      <div class="tipos-grid">
+
+        @for (tipo of tiposServico; track tipo) {
+
+        <ion-button fill="outline" class="botao-tipo" [class.selecionado]="tipoSelecionado === tipo"
+          (click)="selecionarTipo(tipo)">
+
+          {{ tipo }}
+
+        </ion-button>
+
+        }
+
+      </div>
+
+    </section>
+
+    <!-- Selecionar dia -->
+    <section class="secao-data">
+
+      <div class="titulo-data">
+
+        <h2>Selecione o Dia</h2>
+
+        <div class="navegacao-datas">
+
+          <ion-button fill="clear" aria-label="Dias anteriores" [disabled]="grupoDias === 0" (click)="semanaAnterior()">
+
+            <ion-icon name="chevron-back-outline" slot="icon-only">
+            </ion-icon>
+
+          </ion-button>
+
+          <span>{{ periodoExibido }}</span>
+
+          <ion-button fill="clear" aria-label="Próximos dias" [disabled]="!possuiProximoGrupo"
+            (click)="proximaSemana()">
+
+            <ion-icon name="chevron-forward-outline" slot="icon-only">
+            </ion-icon>
+
+          </ion-button>
+
+        </div>
+
+      </div>
+
+      <!-- Dias disponíveis -->
+      <div class="dias-grid">
+
+        @for (dia of diasExibidos; track dia.iso) {
+
+        <ion-button fill="clear" class="botao-dia" [class.selecionado]="dataSelecionada === dia.iso"
+          (click)="selecionarDia(dia.iso)">
+
+          <div class="conteudo-dia">
+            <span>{{ dia.semana }}</span>
+            <strong>{{ dia.numero }}</strong>
+          </div>
+
+        </ion-button>
+
+        }
+
+      </div>
+
+    </section>
+
+    <!-- Horários -->
+    <section class="secao-horarios">
+
+      <h2>Horários Disponíveis</h2>
+
+      <div class="horarios-grid">
+
+        @for (horario of horarios; track horario) {
+
+        <ion-button fill="outline" class="botao-horario" [class.selecionado]="horarioSelecionado === horario"
+          [disabled]="horarioIndisponivel(horario)" (click)="selecionarHorario(horario)">
+
+          {{ horario }}
+
+        </ion-button>
+
+        }
+
+      </div>
+
+    </section>
+
+    <!-- Confirmar -->
+    <ion-button class="botao-confirmar" expand="block" (click)="confirmarAgendamento()">
+
+      Confirmar Agendamento
+
+    </ion-button>
+
+  </div>
+
+</ion-content>
+
+<!-- Mensagens -->
+<ion-toast [isOpen]="toastAberto" [message]="mensagem" [duration]="3000" (didDismiss)="toastAberto = false">
+</ion-toast>

@@ -1,0 +1,159 @@
+/* ==========================================
+   CONTEÚDO
+========================================== */
+
+.pagina-novo-cliente {
+    --background: #f7f8fc;
+    --color: #171b2c;
+}
+
+.cadastro-container {
+    max-width: 480px;
+    min-height: 100%;
+    box-sizing: border-box;
+
+    margin: 0 auto;
+    padding: 28px 24px 32px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================
+   CABEÇALHO
+========================================== */
+
+.cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    margin-bottom: 32px;
+
+    h1 {
+        font-size: 19px;
+        font-weight: 700;
+        color: #171b2c;
+        margin: 0;
+    }
+}
+
+/* Botão circular de voltar */
+
+.botao-voltar {
+    width: 42px;
+    height: 42px;
+    margin: 0;
+
+    --background: #ffffff;
+    --color: #171b2c;
+
+    --border-radius: 50%;
+    --border-color: #dce2ea;
+    --border-style: solid;
+    --border-width: 1px;
+
+    --box-shadow: none;
+
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-top: 0;
+    --padding-bottom: 0;
+
+    ion-icon {
+        font-size: 20px;
+    }
+}
+
+/* ==========================================
+   FORMULÁRIO
+========================================== */
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 20px;
+}
+
+/* Campos */
+
+.campo-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #252a3a;
+        margin-left: 2px;
+    }
+
+    ion-input,
+    ion-textarea {
+        --background: #ffffff;
+        --color: #252a3a;
+
+        --placeholder-color: #9399a5;
+        --placeholder-opacity: 1;
+
+        --border-color: #dcdfe6;
+        --border-radius: 12px;
+
+        --highlight-color-focused: #cf25dc;
+        --highlight-color-valid: #cf25dc;
+
+        font-size: 15px;
+    }
+
+    ion-textarea {
+        --padding-top: 12px;
+        --padding-bottom: 12px;
+    }
+}
+
+/* ==========================================
+   BOTÃO SALVAR
+========================================== */
+
+ion-button.botao-salvar {
+    --background: #cf25dc;
+    --background-activated: #ac1ab8;
+
+    --color: #ffffff;
+    --color-hover: #ffffff;
+    --color-activated: #ffffff;
+
+    --border-radius: 12px;
+    --box-shadow: none;
+
+    height: 54px;
+    margin-top: auto;
+
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: none;
+
+    &::part(native) {
+        color: #ffffff;
+    }
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+========================================== */
+
+@media (max-width: 360px) {
+    .cadastro-container {
+        padding: 22px 16px 28px;
+    }
+
+    .cabecalho {
+        margin-bottom: 24px;
+    }
+
+    .formulario {
+        gap: 16px;
+    }
+}

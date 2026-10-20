@@ -1,0 +1,297 @@
+/* ==========================================
+   CONTEÚDO
+========================================== */
+
+.pagina-perfil {
+    --background: #f7f8fc;
+    --color: #171b2c;
+}
+
+.perfil-container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 28px 20px 40px;
+}
+
+/* ==========================================
+   TÍTULO
+========================================== */
+
+.titulo-pagina {
+    font-size: 22px;
+    font-weight: 800;
+    color: #171b2c;
+
+    margin: 0 0 30px;
+}
+
+/* ==========================================
+   APRESENTAÇÃO DO PROFISSIONAL
+========================================== */
+
+.apresentacao-perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+    margin-bottom: 28px;
+
+    h2 {
+        font-size: 21px;
+        font-weight: 700;
+        color: #171b2c;
+
+        margin: 16px 0 6px;
+    }
+
+    p {
+        font-size: 14px;
+        color: #707787;
+        margin: 0;
+    }
+}
+
+/* Avatar */
+
+.avatar-profissional {
+    width: 96px;
+    height: 96px;
+
+    border: 4px solid #ffffff;
+    border-radius: 50%;
+
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+
+    .iniciais {
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 50%;
+        background: #f4dcf8;
+        color: #b320c0;
+
+        font-size: 30px;
+        font-weight: 700;
+    }
+}
+
+/* ==========================================
+   INDICADORES
+========================================== */
+
+.indicadores-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+
+    margin-bottom: 34px;
+}
+
+.indicador-card {
+    --background: #ffffff;
+    --color: #171b2c;
+
+    margin: 0;
+    border: 1px solid #e0e5ed;
+    border-radius: 15px;
+    box-shadow: none;
+
+    ion-card-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+
+        padding: 18px 8px;
+        text-align: center;
+    }
+
+    strong {
+        font-size: 25px;
+        font-weight: 800;
+        color: black;
+    }
+
+    span {
+        font-size: 12px;
+        font-weight: 500;
+        color: #707787;
+    }
+}
+
+/* ==========================================
+   SEÇÕES
+========================================== */
+
+.secao-perfil {
+    margin-bottom: 28px;
+
+    h2 {
+        font-size: 17px;
+        font-weight: 700;
+        color: #171b2c;
+
+        margin: 0 0 16px;
+    }
+}
+
+/* ==========================================
+   LISTAS
+========================================== */
+
+.lista-perfil {
+    background: transparent;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Informações pessoais */
+
+.item-perfil {
+    --background: #ffffff;
+    --color: #252a3a;
+
+    --padding-start: 16px;
+    --inner-padding-end: 16px;
+    --inner-border-width: 0;
+    --min-height: 72px;
+
+    border: 1px solid #e0e5ed;
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    ion-icon {
+        font-size: 22px;
+        color: black;
+        margin-right: 16px;
+    }
+
+    ion-label {
+        margin: 14px 0;
+
+        p {
+            font-size: 12px;
+            color: #9399a5;
+            margin-bottom: 5px;
+        }
+
+        h3 {
+            font-size: 14px;
+            font-weight: 500;
+            color: #252a3a;
+            margin: 0;
+            white-space: normal;
+        }
+    }
+}
+
+/* ==========================================
+   CONFIGURAÇÕES
+========================================== */
+
+.item-configuracao {
+    --background: #ffffff;
+    --background-activated: #fbedfe;
+    --color: #252a3a;
+
+    --padding-start: 16px;
+    --inner-padding-end: 16px;
+    --inner-border-width: 0;
+    --min-height: 62px;
+
+    border: 1px solid #e0e5ed;
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    ion-icon {
+        font-size: 22px;
+        color: black;
+        margin-right: 16px;
+    }
+
+    ion-label {
+        font-size: 15px;
+        font-weight: 600;
+        color: #252a3a;
+    }
+}
+
+/* ==========================================
+   BOTÃO SAIR
+========================================== */
+
+ion-button.botao-sair {
+    --background: transparent;
+    --color: #db4960;
+
+    --border-color: #f0b9c2;
+    --border-style: solid;
+    --border-width: 3px;
+    --border-radius: 12px;
+
+    --box-shadow: none;
+
+    height: 52px;
+    margin-top: 10px;
+
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: none;
+
+    &::part(native) {
+        color: #db4960;
+    }
+
+    ion-icon {
+        font-size: 21px;
+        color: #db4960;
+    }
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+========================================== */
+
+@media (max-width: 360px) {
+
+    .perfil-container {
+        padding: 22px 14px 32px;
+    }
+
+    .indicadores-grid {
+        gap: 7px;
+    }
+
+    .indicador-card {
+        ion-card-content {
+            padding: 16px 5px;
+        }
+
+        strong {
+            font-size: 22px;
+        }
+
+        span {
+            font-size: 11px;
+        }
+    }
+
+    .item-perfil {
+        --padding-start: 12px;
+        --inner-padding-end: 12px;
+    }
+
+    .item-configuracao {
+        --padding-start: 12px;
+    }
+}
