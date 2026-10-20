@@ -1,0 +1,178 @@
+$primary-purple: #d04bfa;
+$bg-main: #f8fafc;
+$text-dark: #0f172a;
+$text-muted: #64748b;
+$label-muted: #94a3b8;
+$card-bg: #ffffff;
+$border-color: #e2e8f0;
+
+// Cores dos Badges de Status
+$badge-green-bg: #ecfdf5;
+$badge-green-text: #10b981;
+$badge-yellow-bg: #fef3c7;
+$badge-yellow-text: #f59e0b;
+
+ion-content {
+  --background: #{$bg-main};
+}
+
+// Cabeçalho
+.header-section {
+  margin-top: 12px;
+  margin-bottom: 20px;
+
+  .page-title {
+    color: $text-dark;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+  }
+}
+
+// Abas de Seleção (Próximos / Histórico)
+.segment-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+
+  .segment-btn {
+    height: 42px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid $border-color;
+    background-color: $card-bg;
+    color: $text-muted;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &.active {
+      background-color: $primary-purple;
+      color: #ffffff;
+      border-color: $primary-purple;
+      box-shadow: 0 4px 12px rgba(208, 75, 250, 0.25);
+    }
+  }
+}
+
+// Lista de Cartões
+.appointments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .empty-state {
+    text-align: center;
+    padding: 32px 16px;
+    color: $text-muted;
+    font-size: 14px;
+  }
+}
+
+// Estilo do Cartão de Agendamento
+.appointment-card {
+  background-color: $card-bg;
+  border: 1px solid $border-color;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .doctor-info {
+      h3 {
+        color: $text-dark;
+        font-size: 16px;
+        font-weight: 700;
+        margin: 0 0 2px 0;
+      }
+
+      p {
+        color: $text-muted;
+        font-size: 13px;
+        margin: 0;
+      }
+    }
+
+    // Estilos dos Badges
+    .status-badge {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 8px;
+
+      &.status-confirmado {
+        background-color: $badge-green-bg;
+        color: $badge-green-text;
+      }
+
+      &.status-pendente {
+        background-color: $badge-yellow-bg;
+        color: $badge-yellow-text;
+      }
+    }
+  }
+
+  .card-divider {
+    height: 1px;
+    background-color: $border-color;
+  }
+
+  .card-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+
+      &.text-end {
+        text-align: right;
+      }
+
+      .label {
+        color: $label-muted;
+        font-size: 12px;
+        font-weight: 400;
+      }
+
+      .value {
+        color: $text-dark;
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// Tab Bar Inferior
+ion-footer {
+  .custom-tab-bar {
+    --background: #{$bg-main};
+    border-top: 1px solid $border-color;
+
+    ion-tab-button {
+      --color: #{$text-muted};
+      --color-selected: #{$primary-purple};
+
+      ion-icon {
+        font-size: 22px;
+      }
+
+      ion-label {
+        font-size: 11px;
+        font-weight: 500;
+      }
+    }
+  }
+}

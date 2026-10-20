@@ -1,0 +1,113 @@
+<ion-content class="ion-padding">
+  
+  <!-- Título da Página -->
+  <div class="header-section">
+    <h1 class="page-title">Meus Agendamentos</h1>
+  </div>
+
+  <!-- Controle de Abas (Próximos / Histórico) -->
+  <div class="segment-container">
+    <button 
+      class="segment-btn" 
+      [class.active]="abaSelecionada === 'proximos'" 
+      (click)="abaSelecionada = 'proximos'">
+      Próximos
+    </button>
+    <button 
+      class="segment-btn" 
+      [class.active]="abaSelecionada === 'historico'" 
+      (click)="abaSelecionada = 'historico'">
+      Histórico
+    </button>
+  </div>
+
+  <!-- Lista de Agendamentos Próximos -->
+  <div class="appointments-list" *ngIf="abaSelecionada === 'proximos'">
+    <div class="appointment-card" *ngFor="let item of agendamentosProximos">
+      
+      <!-- Topo do Card: Profissional e Status -->
+      <div class="card-header">
+        <div class="doctor-info">
+          <h3>{{ item.profissional }}</h3>
+          <p>{{ item.especialidade }}</p>
+        </div>
+        <span class="status-badge" [ngClass]="item.statusClass">
+          {{ item.status }}
+        </span>
+      </div>
+
+      <div class="card-divider"></div>
+
+      <!-- Rodapé do Card: Serviço e Data/Hora -->
+      <div class="card-details">
+        <div class="detail-item">
+          <span class="label">Serviço</span>
+          <span class="value">{{ item.servico }}</span>
+        </div>
+        <div class="detail-item text-end">
+          <span class="label">Data e Hora</span>
+          <span class="value">{{ item.dataHora }}</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Lista de Agendamentos do Histórico -->
+  <div class="appointments-list" *ngIf="abaSelecionada === 'historico'">
+    <div class="empty-state" *ngIf="agendamentosHistorico.length === 0">
+      <p>Nenhum histórico de agendamentos encontrado.</p>
+    </div>
+    
+    <div class="appointment-card" *ngFor="let item of agendamentosHistorico">
+      <div class="card-header">
+        <div class="doctor-info">
+          <h3>{{ item.profissional }}</h3>
+          <p>{{ item.especialidade }}</p>
+        </div>
+        <span class="status-badge" [ngClass]="item.statusClass">
+          {{ item.status }}
+        </span>
+      </div>
+
+      <div class="card-divider"></div>
+
+      <div class="card-details">
+        <div class="detail-item">
+          <span class="label">Serviço</span>
+          <span class="value">{{ item.servico }}</span>
+        </div>
+        <div class="detail-item text-end">
+          <span class="label">Data e Hora</span>
+          <span class="value">{{ item.dataHora }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>
+
+<!-- Navegação Inferior (Tab Bar) -->
+<ion-footer class="ion-no-border">
+  <ion-tab-bar slot="bottom" class="custom-tab-bar">
+    <ion-tab-button tab="inicio">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label>Início</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="agendamentos" selected="true">
+      <ion-icon name="calendar-number-outline"></ion-icon>
+      <ion-label>Agendamentos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profissionais">
+      <ion-icon name="git-network-outline"></ion-icon>
+      <ion-label>Profissionais</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="perfil">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>Perfil</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-footer>

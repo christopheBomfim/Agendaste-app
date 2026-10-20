@@ -1,0 +1,93 @@
+<ion-content class="ion-padding">
+  
+  <!-- Cabeçalho: Saudação e Foto de Perfil -->
+  <div class="header-section">
+    <div class="user-greeting">
+      <h1>Olá, Cliente</h1>
+      <p>Você tem 1 agendamento próximo</p>
+    </div>
+    <ion-avatar class="user-avatar">
+      <img src="assets/images/user-avatar.png" alt="Foto de perfil" />
+    </ion-avatar>
+  </div>
+
+  <!-- Secção: Próximo Compromisso -->
+  <div class="section-container">
+    <h2 class="section-title">Próximo Compromisso</h2>
+    
+    <div class="appointment-card">
+      <div class="card-top">
+        <div class="doctor-info">
+          <h3>Dr. Marcos Silva</h3>
+          <p>Cardiologista</p>
+        </div>
+        <span class="appointment-type-badge">Consulta</span>
+      </div>
+
+      <div class="card-bottom">
+        <div class="info-item">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span>Domingo, 18 de Outubro</span>
+        </div>
+        <div class="info-item">
+          <ion-icon name="time-outline"></ion-icon>
+          <span>09:15</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Secção: Especialidades Populares -->
+  <div class="section-container">
+    <h2 class="section-title">Especialidades Populares</h2>
+    
+    <div class="specialties-grid">
+      <div class="specialty-card" (click)="selecionarEspecialidade('Cardiologia')">
+        <div class="icon-wrapper">
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </div>
+        <span>Cardiologia</span>
+      </div>
+
+      <div class="specialty-card" (click)="selecionarEspecialidade('Dentista')">
+        <div class="icon-wrapper">
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </div>
+        <span>Dentista</span>
+      </div>
+
+      <div class="specialty-card" (click)="selecionarEspecialidade('Fisioterapia')">
+        <div class="icon-wrapper">
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </div>
+        <span>Fisioterapia</span>
+      </div>
+    </div>
+  </div>
+
+</ion-content>
+
+<!-- Navegação Inferior (Tab Bar) -->
+<ion-footer class="ion-no-border">
+  <ion-tab-bar slot="bottom" class="custom-tab-bar">
+    <ion-tab-button tab="inicio" selected="true">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label>Início</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="agendamentos">
+      <ion-icon name="calendar-number-outline"></ion-icon>
+      <ion-label>Agendamentos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profissionais">
+      <ion-icon name="git-network-outline"></ion-icon>
+      <ion-label>Profissionais</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="perfil">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>Perfil</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-footer>
