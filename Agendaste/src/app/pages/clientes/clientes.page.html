@@ -1,0 +1,93 @@
+<ion-content class="pagina-clientes">
+
+  <div class="clientes-container">
+
+    <!-- Título da página -->
+    <h1 class="titulo-clientes">
+      Meus Clientes
+    </h1>
+
+    <!-- Campo de pesquisa -->
+    <div class="busca-container">
+
+      <ion-searchbar placeholder="Buscar cliente..." aria-label="Buscar cliente" [(ngModel)]="termoBusca"
+        [debounce]="150" show-clear-button="focus">
+      </ion-searchbar>
+
+    </div>
+
+    <!-- Lista de clientes -->
+    <div class="lista-clientes">
+
+      @for (cliente of clientesFiltrados; track cliente.id) {
+
+      <ion-item class="cliente-card" [button]="true" [detail]="false" lines="none" (click)="consultarCliente(cliente)">
+
+        <!-- Avatar -->
+        <ion-avatar slot="start" [class]="'avatar-cliente avatar-' + cliente.cor">
+
+          <div class="iniciais">
+            {{ cliente.iniciais }}
+          </div>
+
+        </ion-avatar>
+
+        <!-- Dados pessoais -->
+        <ion-label class="cliente-info">
+          <h2>{{ cliente.nome }}</h2>
+          <p>{{ cliente.telefone }}</p>
+        </ion-label>
+
+        <!-- Última visita -->
+        <div class="ultima-visita" slot="end">
+          <span>Última visita</span>
+          <strong>{{ cliente.ultimaVisita }}</strong>
+        </div>
+
+      </ion-item>
+
+      } @empty {
+
+      <div class="sem-resultados">
+        <ion-icon name="search-outline"></ion-icon>
+
+        <h3>Nenhum cliente encontrado</h3>
+
+        <p>
+          Tente pesquisar por outro nome ou telefone.
+        </p>
+      </div>
+
+      }
+
+    </div>
+
+  </div>
+
+</ion-content>
+
+<!-- Rodapé com botão Novo Cliente -->
+<ion-footer class="rodape-clientes ion-no-border">
+
+  <ion-toolbar>
+
+    <div class="rodape-conteudo">
+
+      <ion-button class="botao-novo-cliente" expand="block" (click)="novoCliente()">
+
+        <ion-icon name="add-circle-outline" slot="start">
+        </ion-icon>
+
+        Novo Cliente
+
+      </ion-button>
+
+    </div>
+
+  </ion-toolbar>
+
+</ion-footer>
+
+<!-- Mensagens temporárias -->
+<ion-toast [isOpen]="toastAberto" [message]="mensagem" [duration]="2500" (didDismiss)="toastAberto = false">
+</ion-toast>

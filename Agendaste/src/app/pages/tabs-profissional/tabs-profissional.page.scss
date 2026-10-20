@@ -1,0 +1,34 @@
+ion-tab-bar {
+    --background: #f7f8fc;
+    --border: none;
+
+    height: 70px;
+    padding: 6px 4px;
+    border-top: none;
+    box-shadow: none;
+}
+
+ion-tab-button {
+    --background: #f7f8fc;
+
+    --color: #707787;
+    --color-selected: #cf25dc;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    ion-icon {
+        font-size: 25px;
+        margin-bottom: 4px;
+    }
+
+    ion-label {
+        font-size: 12px;
+    }
+}
+
+/* Manter visíveis as abas futuras */
+
+ion-tab-button[disabled] {
+    opacity: 1;
+}

@@ -44,7 +44,7 @@ export class LoginPage {
   entrar() {
     if (!this.email.trim() || !this.senha.trim()) {
       this.exibirMensagem('Preencha todos os campos.');
-      return;
+
     }
 
     const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -54,9 +54,7 @@ export class LoginPage {
       return;
     }
 
-    this.exibirMensagem(
-      'Formulário validado! Autenticação será adicionada depois.'
-    );
+    this.router.navigateByUrl('/profissional/inicio');
   }
 
   recuperarSenha() {

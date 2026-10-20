@@ -1,0 +1,83 @@
+<ion-content class="pagina-dashboard">
+
+  <div class="dashboard-container">
+
+    <!-- Saudação do profissional -->
+    <div class="cabecalho-dashboard">
+
+      <div class="saudacao">
+        <h1>Olá, {{ nomeProfissional }}</h1>
+        <p>{{ dataAtual }}</p>
+      </div>
+
+      <ion-avatar class="foto-perfil">
+        <div class="avatar-iniciais">MS</div>
+      </ion-avatar>
+
+    </div>
+
+    <!-- Indicadores -->
+    <div class="resumo-grid">
+
+      @for (indicador of indicadores; track indicador.titulo) {
+
+      <ion-card class="indicador-card" [class.destaque]="indicador.destaque">
+
+        <ion-card-content>
+          <p>{{ indicador.titulo }}</p>
+          <h2>{{ indicador.valor }}</h2>
+        </ion-card-content>
+
+      </ion-card>
+
+      }
+
+    </div>
+
+    <!-- Próximos agendamentos -->
+    <section class="secao-agendamentos">
+
+      <h2>Próximos Agendamentos</h2>
+
+      <div class="lista-agendamentos">
+
+        @for (agendamento of agendamentos; track agendamento.id) {
+
+        <ion-card class="agendamento-card">
+
+          <ion-card-content>
+
+            <div class="agendamento-info">
+
+              <h3>{{ agendamento.cliente }}</h3>
+
+              <div class="detalhes-agendamento">
+                <span>{{ agendamento.servico }}</span>
+                <span class="separador">•</span>
+                <span class="horario">
+                  {{ agendamento.horario }}
+                </span>
+              </div>
+
+            </div>
+
+            <ion-badge class="status" [class.confirmado]="agendamento.status === 'Confirmado'"
+              [class.pendente]="agendamento.status === 'Pendente'">
+
+              {{ agendamento.status }}
+
+            </ion-badge>
+
+          </ion-card-content>
+
+        </ion-card>
+
+        }
+
+      </div>
+
+    </section>
+
+  </div>
+
+</ion-content>

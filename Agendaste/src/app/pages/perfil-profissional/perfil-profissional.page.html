@@ -1,0 +1,156 @@
+<ion-content class="pagina-perfil">
+
+  <div class="perfil-container">
+
+    <!-- Título da página -->
+    <h1 class="titulo-pagina">Meu Perfil</h1>
+
+    <!-- Apresentação do profissional -->
+    <section class="apresentacao-perfil">
+
+      <ion-avatar class="avatar-profissional">
+        <div class="iniciais">MS</div>
+      </ion-avatar>
+
+      <h2>{{ profissional.nome }}</h2>
+
+      <p>
+        {{ profissional.especialidade }}
+      </p>
+
+    </section>
+
+    <!-- Indicadores -->
+    <div class="indicadores-grid">
+
+      <ion-card class="indicador-card">
+        <ion-card-content>
+          <strong>{{ profissional.totalClientes }}</strong>
+          <span>Clientes</span>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="indicador-card">
+        <ion-card-content>
+          <strong>{{ profissional.totalAgendamentos }}</strong>
+          <span>Agendamentos</span>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="indicador-card">
+        <ion-card-content>
+          <strong>{{ profissional.avaliacao }}</strong>
+          <span>Avaliação</span>
+        </ion-card-content>
+      </ion-card>
+
+    </div>
+
+    <!-- Informações pessoais -->
+    <section class="secao-perfil">
+
+      <h2>Informações Pessoais</h2>
+
+      <ion-list class="lista-perfil">
+
+        <!-- E-mail -->
+        <ion-item class="item-perfil" lines="none">
+
+          <ion-icon name="mail-outline" slot="start">
+          </ion-icon>
+
+          <ion-label>
+            <p>E-mail</p>
+            <h3>{{ profissional.email }}</h3>
+          </ion-label>
+
+        </ion-item>
+
+        <!-- Telefone -->
+        <ion-item class="item-perfil" lines="none">
+
+          <ion-icon name="call-outline" slot="start">
+          </ion-icon>
+
+          <ion-label>
+            <p>Telefone</p>
+            <h3>{{ profissional.telefone }}</h3>
+          </ion-label>
+
+        </ion-item>
+
+        <!-- Endereço -->
+        <ion-item class="item-perfil" lines="none">
+
+          <ion-icon name="location-outline" slot="start">
+          </ion-icon>
+
+          <ion-label class="ion-text-wrap">
+            <p>Endereço</p>
+            <h3>{{ profissional.endereco }}</h3>
+          </ion-label>
+
+        </ion-item>
+
+      </ion-list>
+
+    </section>
+
+    <!-- Configurações -->
+    <section class="secao-perfil">
+
+      <h2>Configurações</h2>
+
+      <ion-list class="lista-perfil">
+
+        <!-- Editar Perfil -->
+        <ion-item class="item-configuracao" [button]="true" [detail]="true" lines="none" (click)="editarPerfil()">
+
+          <ion-icon name="create-outline" slot="start">
+          </ion-icon>
+
+          <ion-label>Editar Perfil</ion-label>
+
+        </ion-item>
+
+        <!-- Notificações -->
+        <ion-item class="item-configuracao" [button]="true" [detail]="true" lines="none" (click)="abrirNotificacoes()">
+
+          <ion-icon name="notifications-outline" slot="start">
+          </ion-icon>
+
+          <ion-label>Notificações</ion-label>
+
+        </ion-item>
+
+        <!-- Alterar Senha -->
+        <ion-item class="item-configuracao" [button]="true" [detail]="true" lines="none" (click)="alterarSenha()">
+
+          <ion-icon name="key-outline" slot="start">
+          </ion-icon>
+
+          <ion-label>Alterar Senha</ion-label>
+
+        </ion-item>
+
+      </ion-list>
+
+    </section>
+
+    <!-- Sair da conta -->
+    <ion-button class="botao-sair" fill="outline" expand="block" (click)="sair()">
+
+      <ion-icon name="log-out-outline" slot="start">
+      </ion-icon>
+
+      Sair da conta
+
+    </ion-button>
+
+  </div>
+
+</ion-content>
+
+<!-- Mensagens temporárias -->
+<ion-toast [isOpen]="toastAberto" [message]="mensagem" [duration]="2500" (didDismiss)="toastAberto = false">
+</ion-toast>

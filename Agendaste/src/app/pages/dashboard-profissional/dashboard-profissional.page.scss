@@ -1,0 +1,214 @@
+/* Conteúdo principal */
+
+.pagina-dashboard {
+    --background: #f7f8fc;
+    --color: #171b2c;
+}
+
+.dashboard-container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 28px 20px 32px;
+}
+
+/* Cabeçalho */
+
+.cabecalho-dashboard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.saudacao {
+    h1 {
+        font-size: 25px;
+        font-weight: 800;
+        color: #171b2c;
+        margin: 0 0 7px;
+    }
+
+    p {
+        font-size: 14px;
+        color: #707787;
+        margin: 0;
+        text-transform: capitalize;
+    }
+}
+
+.foto-perfil {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+
+    .avatar-iniciais {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: #f0ddf5;
+        color: #9d20ae;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-weight: 700;
+        font-size: 18px;
+    }
+}
+
+/* Indicadores */
+
+.resumo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 32px;
+}
+
+.indicador-card {
+    --background: #ffffff;
+    box-shadow: none;
+    border: 1px solid #e0e5ed;
+    border-radius: 15px;
+    margin: 0;
+    min-width: 0;
+
+    &.destaque {
+        --background: #edf8ff;
+    }
+
+    ion-card-content {
+        padding: 16px 12px;
+    }
+
+    p {
+        min-height: 32px;
+        margin: 0 0 8px;
+        color: #525d70;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    h2 {
+        color: #171b2c;
+        font-size: 28px;
+        font-weight: 800;
+        margin: 0;
+    }
+}
+
+/* Seção de agendamentos */
+
+.secao-agendamentos {
+    h2 {
+        color: #171b2c;
+        font-size: 21px;
+        font-weight: 800;
+        margin: 0 0 20px;
+    }
+}
+
+.lista-agendamentos {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.agendamento-card {
+    --background: #ffffff;
+
+    margin: 0;
+    border: 1px solid #e0e5ed;
+    border-radius: 16px;
+    box-shadow: none;
+
+    ion-card-content {
+        padding: 18px 16px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
+}
+
+.agendamento-info {
+    min-width: 0;
+
+    h3 {
+        color: #171b2c;
+        font-size: 16px;
+        font-weight: 700;
+        margin: 0 0 6px;
+    }
+}
+
+.detalhes-agendamento {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+
+    color: #647084;
+    font-size: 14px;
+
+    .separador {
+        color: #94a3b8;
+    }
+
+    .horario {
+        color: #cf25dc;
+        font-weight: 600;
+    }
+}
+
+/* Status dos agendamentos */
+
+.status {
+    flex-shrink: 0;
+    padding: 8px 10px;
+    border-radius: 9px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    &.confirmado {
+        --background: #e9fbf3;
+        --color: #10b981;
+    }
+
+    &.pendente {
+        --background: #fff3c4;
+        --color: #ed9b00;
+    }
+}
+
+/* Ajustes para celulares menores */
+
+@media (max-width: 360px) {
+    .dashboard-container {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .indicador-card {
+        ion-card-content {
+            padding: 12px 8px;
+        }
+
+        p {
+            font-size: 11px;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+    }
+
+    .status {
+        font-size: 11px;
+        padding: 7px 8px;
+    }
+}
