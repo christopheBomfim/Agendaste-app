@@ -1,0 +1,114 @@
+<ion-content class="ion-padding">
+  <div class="perfil-container">
+    
+    <!-- Título da Página -->
+    <div class="header-section">
+      <h1 class="page-title">Meu Perfil</h1>
+    </div>
+
+    <!-- Identificação do Utilizador -->
+    <div class="profile-header">
+      <h2 class="user-name">Ana Costa</h2>
+      <p class="member-since">Cliente desde Março 2024</p>
+    </div>
+
+    <!-- Secção: Informações Pessoais -->
+    <div class="section-group">
+      <span class="section-label">INFORMAÇÕES PESSOAIS</span>
+      
+      <div class="card-box">
+        <!-- E-mail -->
+        <div class="info-row">
+          <ion-icon name="mail-outline" class="row-icon"></ion-icon>
+          <div class="row-content">
+            <span class="field-label">E-mail</span>
+            <span class="field-value">ana.costa@email.com</span>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Telefone -->
+        <div class="info-row">
+          <ion-icon name="call-outline" class="row-icon"></ion-icon>
+          <div class="row-content">
+            <span class="field-label">Telefone</span>
+            <span class="field-value">(11) 91234-5678</span>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Endereço -->
+        <div class="info-row">
+          <ion-icon name="location-outline" class="row-icon"></ion-icon>
+          <div class="row-content">
+            <span class="field-label">Endereço</span>
+            <span class="field-value">Rua Augusta, 500 - São Paulo, SP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Secção: Configurações -->
+    <div class="section-group">
+      <span class="section-label">CONFIGURAÇÕES</span>
+      
+      <div class="card-box">
+        <!-- Editar Informações -->
+        <div class="action-row" (click)="editarInformacoes()">
+          <div class="action-left">
+            <ion-icon name="pencil-outline" class="row-icon-dark"></ion-icon>
+            <span class="action-label">Editar Informações</span>
+          </div>
+          <ion-icon name="chevron-forward-outline" class="chevron-icon"></ion-icon>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Notificações -->
+        <div class="action-row" (click)="abrirNotificacoes()">
+          <div class="action-left">
+            <ion-icon name="notifications-outline" class="row-icon-dark"></ion-icon>
+            <span class="action-label">Notificações</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botão Sair da conta -->
+    <div class="logout-group">
+      <ion-button expand="block" fill="outline" class="btn-logout" (click)="sair()">
+        Sair da conta
+      </ion-button>
+    </div>
+
+  </div>
+</ion-content>
+
+<!-- Navegação Inferior (Tab Bar) -->
+<ion-footer class="ion-no-border">
+  <div class="footer-container">
+    <ion-tab-bar slot="bottom" class="custom-tab-bar">
+      <ion-tab-button tab="inicio">
+        <ion-icon name="home-outline"></ion-icon>
+        <ion-label>Início</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="agendamentos">
+        <ion-icon name="calendar-number-outline"></ion-icon>
+        <ion-label>Agendamentos</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="profissionais">
+        <ion-icon name="git-network-outline"></ion-icon>
+        <ion-label>Profissionais</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="perfil" selected="true">
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </div>
+</ion-footer>

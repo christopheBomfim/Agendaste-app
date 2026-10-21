@@ -1,93 +1,97 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar class="custom-toolbar">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/" icon="arrow-back-outline" text=""></ion-back-button>
-    </ion-buttons>
-    <ion-title class="page-title">Editar Perfil</ion-title>
-  </ion-toolbar>
+  <div class="header-container">
+    <ion-toolbar class="custom-toolbar">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/" icon="arrow-back-outline" text=""></ion-back-button>
+      </ion-buttons>
+      <ion-title class="page-title">Editar Perfil</ion-title>
+    </ion-toolbar>
+  </div>
 </ion-header>
 
 <ion-content class="ion-padding">
-  
-  <!-- Seção da Foto de Perfil -->
-  <div class="photo-section">
-    <div class="avatar-container">
-      <img src="assets/images/doctor-avatar.png" alt="Foto de perfil" class="profile-avatar" />
-    </div>
-    <ion-button fill="clear" size="small" class="change-photo-btn" (click)="alterarFoto()">
-      Alterar foto de perfil
-    </ion-button>
-  </div>
-
-  <!-- Formulário de Edição -->
-  <form class="form-container">
+  <div class="editar-perfil-container">
     
-    <!-- Especialidade -->
-    <div class="field-group">
-      <ion-label class="field-label">Especialidade</ion-label>
-      <div class="custom-input-item">
-        <ion-icon name="medical-outline" class="input-icon"></ion-icon>
-        <ion-input type="text" value="Cardiologia" placeholder="Sua especialidade"></ion-input>
+    <!-- Seção da Foto de Perfil -->
+    <div class="photo-section">
+      <div class="avatar-container">
+        <img src="assets/images/doctor-avatar.png" alt="Foto de perfil" class="profile-avatar" />
       </div>
-    </div>
-
-    <!-- Horário Disponível -->
-    <div class="field-group">
-      <ion-label class="field-label">Horário Disponível</ion-label>
-      <div class="time-grid">
-        <div class="custom-input-item">
-          <ion-icon name="time-outline" class="input-icon"></ion-icon>
-          <ion-input type="text" value="08:00"></ion-input>
-        </div>
-        <div class="custom-input-item">
-          <ion-icon name="time-outline" class="input-icon"></ion-icon>
-          <ion-input type="text" value="18:00"></ion-input>
-        </div>
-      </div>
-    </div>
-
-    <!-- Telefone -->
-    <div class="field-group">
-      <ion-label class="field-label">Telefone</ion-label>
-      <div class="custom-input-item">
-        <ion-icon name="call-outline" class="input-icon"></ion-icon>
-        <ion-input type="tel" value="(11) 98765-4321" placeholder="(00) 00000-0000"></ion-input>
-      </div>
-    </div>
-
-    <!-- Registro Profissional -->
-    <div class="field-group">
-      <ion-label class="field-label">Registro Profissional</ion-label>
-      <div class="registration-grid">
-        <div class="custom-select-item">
-          <ion-select interface="popover" value="CRM" toggleIcon="caret-down-sharp">
-            <ion-select-option value="CRM">CRM</ion-select-option>
-            <ion-select-option value="CRO">CRO</ion-select-option>
-            <ion-select-option value="CRP">CRP</ion-select-option>
-          </ion-select>
-        </div>
-
-        <div class="custom-select-item">
-          <ion-select interface="popover" value="SP" toggleIcon="caret-down-sharp">
-            <ion-select-option value="SP">SP</ion-select-option>
-            <ion-select-option value="MG">MG</ion-select-option>
-            <ion-select-option value="RJ">RJ</ion-select-option>
-          </ion-select>
-        </div>
-
-        <div class="custom-input-item number-input">
-          <ion-input type="text" value="123456" placeholder="Número"></ion-input>
-        </div>
-      </div>
-    </div>
-
-    <!-- Botão de Salvar Alterações -->
-    <div class="action-container">
-      <ion-button expand="block" class="btn-save" (click)="salvarAlteracoes()">
-        Salvar Alterações
+      <ion-button fill="clear" size="small" class="change-photo-btn" (click)="alterarFoto()">
+        Alterar foto de perfil
       </ion-button>
     </div>
 
-  </form>
+    <!-- Formulário de Edição -->
+    <form class="form-container">
+      
+      <!-- Especialidade -->
+      <div class="field-group">
+        <ion-label class="field-label">Especialidade</ion-label>
+        <div class="custom-input-item">
+          <ion-icon name="medical-outline" class="input-icon"></ion-icon>
+          <ion-input type="text" value="Cardiologia" placeholder="Sua especialidade"></ion-input>
+        </div>
+      </div>
 
+      <!-- Horário Disponível -->
+      <div class="field-group">
+        <ion-label class="field-label">Horário Disponível</ion-label>
+        <div class="time-grid">
+          <div class="custom-input-item">
+            <ion-icon name="time-outline" class="input-icon"></ion-icon>
+            <ion-input type="text" value="08:00"></ion-input>
+          </div>
+          <div class="custom-input-item">
+            <ion-icon name="time-outline" class="input-icon"></ion-icon>
+            <ion-input type="text" value="18:00"></ion-input>
+          </div>
+        </div>
+      </div>
+
+      <!-- Telefone -->
+      <div class="field-group">
+        <ion-label class="field-label">Telefone</ion-label>
+        <div class="custom-input-item">
+          <ion-icon name="call-outline" class="input-icon"></ion-icon>
+          <ion-input type="tel" value="(11) 98765-4321" placeholder="(00) 00000-0000"></ion-input>
+        </div>
+      </div>
+
+      <!-- Registro Profissional -->
+      <div class="field-group">
+        <ion-label class="field-label">Registro Profissional</ion-label>
+        <div class="registration-grid">
+          <div class="custom-select-item">
+            <ion-select interface="popover" value="CRM" toggleIcon="caret-down-sharp">
+              <ion-select-option value="CRM">CRM</ion-select-option>
+              <ion-select-option value="CRO">CRO</ion-select-option>
+              <ion-select-option value="CRP">CRP</ion-select-option>
+            </ion-select>
+          </div>
+
+          <div class="custom-select-item">
+            <ion-select interface="popover" value="SP" toggleIcon="caret-down-sharp">
+              <ion-select-option value="SP">SP</ion-select-option>
+              <ion-select-option value="MG">MG</ion-select-option>
+              <ion-select-option value="RJ">RJ</ion-select-option>
+            </ion-select>
+          </div>
+
+          <div class="custom-input-item number-input">
+            <ion-input type="text" value="123456" placeholder="Número"></ion-input>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botão de Salvar Alterações -->
+      <div class="action-container">
+        <ion-button expand="block" class="btn-save" (click)="salvarAlteracoes()">
+          Salvar Alterações
+        </ion-button>
+      </div>
+
+    </form>
+
+  </div>
 </ion-content>

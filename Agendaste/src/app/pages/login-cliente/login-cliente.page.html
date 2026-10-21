@@ -1,0 +1,54 @@
+<ion-content class="ion-padding">
+  <div class="login-container">
+
+    <!-- Marca e Logo -->
+    <div class="brand-section">
+      <div class="logo-box">
+        <ion-icon name="calendar-number-outline"></ion-icon>
+      </div>
+      <h1 class="brand-title">Agendaste?</h1>
+      <p class="brand-subtitle">Seu tempo sob controle</p>
+    </div>
+
+    <!-- Formulário de Login -->
+    <form class="form-container" (ngSubmit)="entrar()">
+      
+      <!-- Campo: E-mail -->
+      <div class="field-group">
+        <ion-label class="field-label">E-mail</ion-label>
+        <div class="custom-input-item">
+          <ion-icon name="mail-outline" class="input-icon"></ion-icon>
+          <ion-input 
+            type="email" 
+            placeholder="exemplo@email.com"
+            [(ngModel)]="email"
+            name="email">
+          </ion-input>
+        </div>
+      </div>
+
+      <!-- Campo: CPF -->
+      <div class="field-group">
+        <ion-label class="field-label">CPF</ion-label>
+        <div class="custom-input-item">
+          <ion-icon name="lock-closed-outline" class="input-icon"></ion-icon>
+          <ion-input 
+            type="text" 
+            placeholder="Digite aqui o seu cpf"
+            [(ngModel)]="cpf"
+            name="cpf">
+          </ion-input>
+        </div>
+      </div>
+
+      <!-- Botão Entrar -->
+      <div class="action-container">
+        <ion-button expand="block" type="submit" class="btn-submit">
+          Entrar
+        </ion-button>
+      </div>
+
+    </form>
+
+  </div>
+</ion-content>

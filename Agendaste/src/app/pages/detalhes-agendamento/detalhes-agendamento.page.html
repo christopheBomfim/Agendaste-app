@@ -1,0 +1,71 @@
+<ion-header class="ion-no-border">
+  <div class="header-container">
+    <ion-toolbar class="custom-toolbar">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/agendamentos" icon="arrow-back-outline" text=""></ion-back-button>
+      </ion-buttons>
+      <ion-title class="page-title">Detalhes do Agendamento</ion-title>
+    </ion-toolbar>
+  </div>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="detalhes-container">
+
+    <!-- Card do Profissional -->
+    <div class="doctor-card">
+      <div class="doctor-avatar">
+        <img src="assets/images/doctor-avatar.png" alt="Dr. Marcos Silva" />
+      </div>
+      <div class="doctor-info">
+        <h3>{{ agendamento.profissional }}</h3>
+        <p>{{ agendamento.especialidade }}</p>
+      </div>
+    </div>
+
+    <!-- Card de Informações do Agendamento -->
+    <div class="details-card">
+      
+      <!-- Status -->
+      <div class="status-row">
+        <span class="status-label">Status do Agendamento</span>
+        <span class="status-badge" [ngClass]="agendamento.statusClass">
+          {{ agendamento.status }}
+        </span>
+      </div>
+
+      <div class="card-divider"></div>
+
+      <!-- Data e Horário -->
+      <div class="detail-item">
+        <span class="label">Data e Horário</span>
+        <span class="value-highlight">{{ agendamento.dataHora }}</span>
+      </div>
+
+      <!-- Local de Atendimento -->
+      <div class="detail-item">
+        <span class="label">Local de Atendimento</span>
+        <span class="value-highlight">{{ agendamento.local }}</span>
+      </div>
+
+      <!-- Observações -->
+      <div class="detail-item">
+        <span class="label">Observações</span>
+        <p class="value-description">{{ agendamento.observacoes }}</p>
+      </div>
+
+    </div>
+
+    <!-- Botões de Ação -->
+    <div class="actions-container">
+      <ion-button expand="block" class="btn-primary" (click)="remarcar()">
+        Remarcar
+      </ion-button>
+      
+      <ion-button expand="block" fill="outline" class="btn-danger" (click)="cancelarAgendamento()">
+        Cancelar Agendamento
+      </ion-button>
+    </div>
+
+  </div>
+</ion-content>

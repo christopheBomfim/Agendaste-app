@@ -16,6 +16,14 @@ ion-content {
   --background: #{$bg-main};
 }
 
+// Container centralizado com largura máxima ajustada
+.agendamentos-container {
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
 // Cabeçalho
 .header-section {
   margin-top: 12px;
@@ -72,7 +80,7 @@ ion-content {
   }
 }
 
-// Estilo do Cartão de Agendamento
+// Cartão de Agendamento
 .appointment-card {
   background-color: $card-bg;
   border: 1px solid $border-color;
@@ -102,7 +110,6 @@ ion-content {
       }
     }
 
-    // Estilos dos Badges
     .status-badge {
       font-size: 12px;
       font-weight: 600;
@@ -157,6 +164,14 @@ ion-content {
 
 // Tab Bar Inferior
 ion-footer {
+  background-color: $bg-main;
+
+  .footer-container {
+    max-width: 420px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
   .custom-tab-bar {
     --background: #{$bg-main};
     border-top: 1px solid $border-color;

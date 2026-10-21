@@ -1,0 +1,211 @@
+$primary-purple: #d04bfa;
+$bg-main: #f8fafc;
+$text-dark: #0f172a;
+$text-muted: #475569;
+$label-muted: #94a3b8;
+$card-bg: #ffffff;
+$border-color: #e2e8f0;
+$danger-red: #ef4444;
+
+// Cores dos Badges
+$badge-green-bg: #ecfdf5;
+$badge-green-text: #10b981;
+$badge-yellow-bg: #fef3c7;
+$badge-yellow-text: #f59e0b;
+
+ion-header {
+  background-color: $bg-main;
+}
+
+ion-content {
+  --background: #{$bg-main};
+}
+
+// Containers centralizadores com largura máxima ajustada
+.header-container,
+.detalhes-container {
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+// Cabeçalho da Página
+.custom-toolbar {
+  --background: #{$bg-main};
+  --border-width: 0;
+  padding: 12px 0 0 0;
+
+  ion-back-button {
+    --color: #{$text-dark};
+    --background: #{$card-bg};
+    --border-radius: 50%;
+    --padding-start: 0;
+    --padding-end: 0;
+    width: 42px;
+    height: 42px;
+    border: 1px solid $border-color;
+  }
+
+  .page-title {
+    color: $text-dark;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    text-align: left;
+    padding-start: 8px;
+  }
+}
+
+// Container Geral
+.detalhes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 8px;
+}
+
+// Card do Profissional
+.doctor-card {
+  background-color: $card-bg;
+  border: 1px solid $border-color;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  .doctor-avatar {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+
+  .doctor-info {
+    h3 {
+      color: $text-dark;
+      font-size: 18px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      margin: 0 0 4px 0;
+    }
+
+    p {
+      color: $text-muted;
+      font-size: 14px;
+      margin: 0;
+    }
+  }
+}
+
+// Card de Detalhes do Agendamento
+.details-card {
+  background-color: $card-bg;
+  border: 1px solid $border-color;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .status-label {
+      color: $text-muted;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .status-badge {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 8px;
+
+      &.status-confirmado {
+        background-color: $badge-green-bg;
+        color: $badge-green-text;
+      }
+
+      &.status-pendente {
+        background-color: $badge-yellow-bg;
+        color: $badge-yellow-text;
+      }
+    }
+  }
+
+  .card-divider {
+    height: 1px;
+    background-color: $border-color;
+  }
+
+  .detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .label {
+      color: $label-muted;
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    .value-highlight {
+      color: $text-dark;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .value-description {
+      color: $text-muted;
+      font-size: 14px;
+      line-height: 1.4;
+      margin: 0;
+    }
+  }
+}
+
+// Botões de Ação Inferiores
+.actions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+
+  .btn-primary {
+    --background: #{$primary-purple};
+    --border-radius: 12px;
+    --color: #ffffff;
+    height: 52px;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: none;
+    margin: 0;
+    box-shadow: 0 4px 14px rgba(208, 75, 250, 0.25);
+  }
+
+  .btn-danger {
+    --border-color: #fca5a5;
+    --border-width: 1px;
+    --border-style: solid;
+    --border-radius: 12px;
+    --color: #{$danger-red};
+    --background: #{$card-bg};
+    height: 52px;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: none;
+    margin: 0;
+  }
+}

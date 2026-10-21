@@ -1,4 +1,3 @@
-// Paleta de Cores extraída do design
 $primary-purple: #d04bfa;
 $bg-main: #f8fafc;
 $text-dark: #1e293b;
@@ -7,15 +6,28 @@ $input-bg: #ffffff;
 $icon-color: #94a3b8;
 $border-color: #e2e8f0;
 
+ion-header {
+  background-color: $bg-main;
+}
+
 ion-content {
   --background: #{$bg-main};
+}
+
+// Containers centralizadores com largura máxima proporcional
+.header-container,
+.editar-perfil-container {
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 // Topo e Botão Voltar
 .custom-toolbar {
   --background: #{$bg-main};
   --border-width: 0;
-  padding: 12px 8px 0 8px;
+  padding: 12px 0 0 0;
 
   ion-back-button {
     --color: #{$text-dark};
@@ -25,8 +37,7 @@ ion-content {
     --padding-end: 0;
     width: 42px;
     height: 42px;
-    margin-left: 8px;
-    border: 1px solid #{$border-color};
+    border: 1px solid $border-color;
   }
 
   .page-title {
@@ -73,7 +84,6 @@ ion-content {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 0 4px;
 
   .field-group {
     display: flex;
@@ -87,7 +97,7 @@ ion-content {
     }
   }
 
-  // Estilos Gerais dos Inputs
+  // Inputs Padrão
   .custom-input-item {
     background-color: $input-bg;
     border: 1px solid $border-color;
@@ -167,6 +177,7 @@ ion-content {
       font-weight: 600;
       text-transform: none;
       margin: 0;
+      box-shadow: 0 4px 14px rgba(208, 75, 250, 0.25);
     }
   }
 }

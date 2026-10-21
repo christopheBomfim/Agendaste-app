@@ -1,0 +1,200 @@
+$primary-purple: #d04bfa;
+$bg-main: #f8fafc;
+$text-dark: #0f172a;
+$text-muted: #64748b;
+$label-muted: #94a3b8;
+$card-bg: #ffffff;
+$border-color: #e2e8f0;
+$danger-red: #ef4444;
+
+ion-content {
+  --background: #{$bg-main};
+}
+
+.perfil-container {
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+// Cabeçalho da página
+.header-section {
+  margin-top: 12px;
+
+  .page-title {
+    color: $text-dark;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+  }
+}
+
+// Bloco de Identificação
+.profile-header {
+  text-align: center;
+  margin-top: 4px;
+  margin-bottom: 4px;
+
+  .user-name {
+    color: $text-dark;
+    font-size: 22px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    margin: 0 0 4px 0;
+  }
+
+  .member-since {
+    color: $text-muted;
+    font-size: 13px;
+    font-weight: 400;
+    margin: 0;
+  }
+}
+
+// Secções e Cartões
+.section-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .section-label {
+    color: $text-muted;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+.card-box {
+  background-color: $card-bg;
+  border: 1px solid $border-color;
+  border-radius: 16px;
+  padding: 4px 16px;
+  display: flex;
+  flex-direction: column;
+
+  .divider {
+    height: 1px;
+    background-color: $border-color;
+    margin: 0;
+  }
+}
+
+// Linhas de Informação Pessoal
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+
+  .row-icon {
+    color: $label-muted;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .row-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    .field-label {
+      color: $label-muted;
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    .field-value {
+      color: $text-dark;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+}
+
+// Linhas de Ação (Configurações)
+.action-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  cursor: pointer;
+
+  .action-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .row-icon-dark {
+      color: $text-dark;
+      font-size: 20px;
+    }
+
+    .action-label {
+      color: $text-dark;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+
+  .chevron-icon {
+    color: $label-muted;
+    font-size: 16px;
+  }
+}
+
+// Botão Sair da Conta
+.logout-group {
+  margin-top: 8px;
+  margin-bottom: 16px;
+
+  .btn-logout {
+    --border-color: #fca5a5;
+    --border-width: 1px;
+    --border-style: solid;
+    --border-radius: 12px;
+    --color: #{$danger-red};
+    --background: #{$card-bg};
+    height: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: none;
+    margin: 0;
+  }
+}
+
+// Tab Bar Inferior
+ion-footer {
+  background-color: $bg-main;
+
+  .footer-container {
+    max-width: 420px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .custom-tab-bar {
+    --background: #{$bg-main};
+    border-top: 1px solid $border-color;
+
+    ion-tab-button {
+      --color: #{$text-muted};
+      --color-selected: #{$primary-purple};
+
+      ion-icon {
+        font-size: 22px;
+      }
+
+      ion-label {
+        font-size: 11px;
+        font-weight: 500;
+      }
+    }
+  }
+}
