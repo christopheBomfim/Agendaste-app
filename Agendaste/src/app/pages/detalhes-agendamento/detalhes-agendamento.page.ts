@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   IonContent,
   IonHeader,
@@ -54,7 +55,7 @@ export class DetalhesAgendamentoPage implements OnInit {
     observacoes: 'Trazer exames de sangue recentes e receitas anteriores se disponíveis.'
   };
 
-  constructor() {
+  constructor(private router: Router) {
     addIcons({
       arrowBackOutline
     });
@@ -64,10 +65,12 @@ export class DetalhesAgendamentoPage implements OnInit {
 
   remarcar() {
     console.log('Navegar para fluxo de remarcação');
+    this.router.navigate(['/agendamentos-cliente']);
   }
 
   cancelarAgendamento() {
     console.log('Solicitar cancelamento do agendamento');
+    this.router.navigate(['/agendamentos-cliente']);
   }
 
 }

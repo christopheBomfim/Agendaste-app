@@ -9,6 +9,13 @@ ion-content {
   --background: #{$bg-main};
 }
 
+.dashboard-cliente-container {
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
 // Cabeçalho
 .header-section {
   display: flex;
@@ -37,6 +44,7 @@ ion-content {
   .user-avatar {
     width: 46px;
     height: 46px;
+    cursor: pointer;
   }
 }
 
@@ -63,6 +71,12 @@ ion-content {
   flex-direction: column;
   gap: 24px;
   box-shadow: 0 4px 14px rgba(208, 75, 250, 0.25);
+  cursor: pointer;
+  transition: transform 0.15s ease-in-out;
+
+  &:active {
+    transform: scale(0.99);
+  }
 
   .card-top {
     display: flex;
@@ -149,6 +163,15 @@ ion-content {
 
 // Tab Bar Inferior
 ion-footer {
+  background-color: $bg-main;
+
+  .footer-container {
+    max-width: 420px;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
   .custom-tab-bar {
     --background: #{$bg-main};
     border-top: 1px solid $border-color;

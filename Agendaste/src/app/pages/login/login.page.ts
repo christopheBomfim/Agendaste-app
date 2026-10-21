@@ -64,9 +64,7 @@ export class LoginPage {
   }
 
   consultarAgendamentos() {
-    this.exibirMensagem(
-      'Em breve: consulta por CPF ou e-mail.'
-    );
+    this.router.navigateByUrl('/login-cliente');
   }
 
   cadastrarProfissional() {

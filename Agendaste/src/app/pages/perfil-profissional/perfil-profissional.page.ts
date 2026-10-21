@@ -88,9 +88,7 @@ export class PerfilProfissionalPage {
 
   // Editar informações do profissional
   editarPerfil(): void {
-    this.exibirMensagem(
-      'A página Editar Perfil será criada em breve.'
-    );
+    this.router.navigate(['/editar-perfil-profissional']);
   }
 
   // Abrir notificações

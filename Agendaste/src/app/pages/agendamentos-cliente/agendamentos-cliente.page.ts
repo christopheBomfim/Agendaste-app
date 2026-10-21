@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   IonContent,
   IonFooter,
@@ -75,7 +76,7 @@ export class AgendamentosClientePage implements OnInit {
 
   agendamentosHistorico: Agendamento[] = [];
 
-  constructor() {
+  constructor(private router: Router) {
     addIcons({
       homeOutline,
       calendarNumberOutline,
@@ -85,5 +86,13 @@ export class AgendamentosClientePage implements OnInit {
   }
 
   ngOnInit() {}
+
+  navegar(rota: string) {
+    this.router.navigate([rota]);
+  }
+
+  verDetalhes(item?: Agendamento) {
+    this.router.navigate(['/detalhes-agendamento']);
+  }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   IonContent,
   IonFooter,
@@ -43,7 +44,7 @@ import {
 })
 export class PerfilClientePage implements OnInit {
 
-  constructor() {
+  constructor(private router: Router) {
     addIcons({
       mailOutline,
       callOutline,
@@ -69,7 +70,11 @@ export class PerfilClientePage implements OnInit {
   }
 
   sair() {
-    console.log('Sair da conta');
+    this.router.navigate(['/login']);
+  }
+
+  navegar(rota: string) {
+    this.router.navigate([rota]);
   }
 
 }

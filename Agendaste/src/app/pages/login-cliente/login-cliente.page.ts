@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   IonContent,
   IonIcon,
@@ -35,7 +36,7 @@ export class LoginClientePage implements OnInit {
   email: string = '';
   cpf: string = '';
 
-  constructor() {
+  constructor(private router: Router) {
     addIcons({
       calendarNumberOutline,
       mailOutline,
@@ -46,7 +47,11 @@ export class LoginClientePage implements OnInit {
   ngOnInit() {}
 
   entrar() {
-    console.log('Tentativa de login:', { email: this.email, cpf: this.cpf });
+    this.router.navigate(['/dashboard-cliente']);
+  }
+
+  voltar() {
+    this.router.navigate(['/login']);
   }
 
 }

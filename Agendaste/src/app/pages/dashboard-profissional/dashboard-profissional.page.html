@@ -10,7 +10,7 @@
         <p>{{ dataAtual }}</p>
       </div>
 
-      <ion-avatar class="foto-perfil">
+      <ion-avatar class="foto-perfil" (click)="irParaPerfil()" style="cursor: pointer;" aria-label="Ir para perfil">
         <div class="avatar-iniciais">MS</div>
       </ion-avatar>
 
@@ -21,7 +21,7 @@
 
       @for (indicador of indicadores; track indicador.titulo) {
 
-      <ion-card class="indicador-card" [class.destaque]="indicador.destaque">
+      <ion-card class="indicador-card" [class.destaque]="indicador.destaque" (click)="clicarIndicador(indicador.titulo)" style="cursor: pointer;">
 
         <ion-card-content>
           <p>{{ indicador.titulo }}</p>

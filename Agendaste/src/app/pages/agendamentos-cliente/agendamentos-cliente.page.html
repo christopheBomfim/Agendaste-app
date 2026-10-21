@@ -24,7 +24,7 @@
 
     <!-- Lista de Agendamentos Próximos -->
     <div class="appointments-list" *ngIf="abaSelecionada === 'proximos'">
-      <div class="appointment-card" *ngFor="let item of agendamentosProximos">
+      <div class="appointment-card" *ngFor="let item of agendamentosProximos" (click)="verDetalhes(item)" role="button" tabindex="0">
         
         <!-- Topo do Card: Profissional e Status -->
         <div class="card-header">
@@ -60,7 +60,7 @@
         <p>Nenhum histórico de agendamentos encontrado.</p>
       </div>
       
-      <div class="appointment-card" *ngFor="let item of agendamentosHistorico">
+      <div class="appointment-card" *ngFor="let item of agendamentosHistorico" (click)="verDetalhes(item)" role="button" tabindex="0">
         <div class="card-header">
           <div class="doctor-info">
             <h3>{{ item.profissional }}</h3>
@@ -93,12 +93,12 @@
 <ion-footer class="ion-no-border">
   <div class="footer-container">
     <ion-tab-bar slot="bottom" class="custom-tab-bar">
-      <ion-tab-button tab="inicio">
+      <ion-tab-button tab="inicio" (click)="navegar('/dashboard-cliente')">
         <ion-icon name="home-outline"></ion-icon>
         <ion-label>Início</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="agendamentos" selected="true">
+      <ion-tab-button tab="agendamentos" selected="true" (click)="navegar('/agendamentos-cliente')">
         <ion-icon name="calendar-number-outline"></ion-icon>
         <ion-label>Agendamentos</ion-label>
       </ion-tab-button>
@@ -108,7 +108,7 @@
         <ion-label>Profissionais</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="perfil">
+      <ion-tab-button tab="perfil" (click)="navegar('/perfil-cliente')">
         <ion-icon name="person-outline"></ion-icon>
         <ion-label>Perfil</ion-label>
       </ion-tab-button>

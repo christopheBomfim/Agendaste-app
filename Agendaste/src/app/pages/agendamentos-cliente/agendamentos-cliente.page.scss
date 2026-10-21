@@ -89,6 +89,12 @@ ion-content {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  cursor: pointer;
+  transition: transform 0.15s ease-in-out;
+
+  &:active {
+    transform: scale(0.99);
+  }
 
   .card-header {
     display: flex;

@@ -1,4 +1,8 @@
 ion-tab-bar {
+    max-width: 420px;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
     --background: #f7f8fc;
     --border: none;
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   IonContent,
   IonAvatar,
@@ -40,7 +41,7 @@ import {
 })
 export class DashboardClientePage implements OnInit {
 
-  constructor() {
+  constructor(private router: Router) {
     addIcons({
       homeOutline,
       calendarOutline,
@@ -56,6 +57,14 @@ export class DashboardClientePage implements OnInit {
 
   selecionarEspecialidade(nome: string) {
     console.log('Especialidade selecionada:', nome);
+  }
+
+  navegar(rota: string) {
+    this.router.navigate([rota]);
+  }
+
+  verDetalhes() {
+    this.router.navigate(['/detalhes-agendamento']);
   }
 
 }

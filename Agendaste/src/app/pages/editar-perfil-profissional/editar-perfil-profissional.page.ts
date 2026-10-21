@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   IonContent,
   IonHeader,
@@ -58,7 +59,7 @@ export class EditarPerfilProfissionalPage implements OnInit {
     numeroRegistro: '123456'
   };
 
-  constructor() {
+  constructor(private router: Router) {
     addIcons({
       arrowBackOutline,
       medicalOutline,
@@ -76,6 +77,7 @@ export class EditarPerfilProfissionalPage implements OnInit {
 
   salvarAlteracoes() {
     console.log('Salvar alterações do perfil:', this.perfil);
+    this.router.navigate(['/profissional/perfil']);
   }
 
 }

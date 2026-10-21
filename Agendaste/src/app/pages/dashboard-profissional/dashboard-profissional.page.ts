@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import {
   IonContent,
@@ -44,6 +45,18 @@ export class DashboardProfissionalPage {
     day: 'numeric',
     month: 'long'
   }).format(new Date());
+
+  constructor(private router: Router) {}
+
+  irParaPerfil() {
+    this.router.navigate(['/profissional/perfil']);
+  }
+
+  clicarIndicador(titulo: string) {
+    if (titulo === 'Total Clientes') {
+      this.router.navigate(['/profissional/clientes']);
+    }
+  }
 
   // Indicadores demonstrativos
   indicadores: Indicador[] = [
