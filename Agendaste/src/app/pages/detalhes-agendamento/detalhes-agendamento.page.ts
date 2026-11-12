@@ -9,8 +9,7 @@ import {
   IonToolbar,
   IonButtons,
   IonBackButton,
-  IonButton,
-  IonIcon
+  IonButton
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline } from 'ionicons/icons';
@@ -38,7 +37,6 @@ interface DetalhesAgendamento {
     IonButtons,
     IonBackButton,
     IonButton,
-    IonIcon,
     CommonModule,
     FormsModule
   ]
