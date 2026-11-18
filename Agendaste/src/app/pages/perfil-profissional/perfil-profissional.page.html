@@ -3,45 +3,90 @@
   <div class="perfil-container">
 
     <!-- Título da página -->
-    <h1 class="titulo-pagina">Meu Perfil</h1>
+    <h1 class="titulo-pagina">
+      Meu Perfil
+    </h1>
 
     <!-- Apresentação do profissional -->
     <section class="apresentacao-perfil">
 
       <ion-avatar class="avatar-profissional">
-        <div class="iniciais">MS</div>
+
+        <div class="iniciais">
+          {{ iniciaisProfissional() }}
+        </div>
+
       </ion-avatar>
 
-      <h2>{{ profissional.nome }}</h2>
+      <!-- Nome do profissional -->
+      <h2>
+        {{
+        carregandoPerfil()
+        ? 'Carregando perfil...'
+        : profissional().nome
+        }}
+      </h2>
 
+      <!-- Especialidade -->
       <p>
-        {{ profissional.especialidade }}
+        {{ profissional().especialidade }}
       </p>
+
+      <!-- Erro ao carregar -->
+      @if (erroPerfil()) {
+      <p class="ion-text-center">
+        {{ erroPerfil() }}
+      </p>
+      }
 
     </section>
 
     <!-- Indicadores -->
     <div class="indicadores-grid">
 
+      <!-- Clientes -->
       <ion-card class="indicador-card">
+
         <ion-card-content>
-          <strong>{{ profissional.totalClientes }}</strong>
+
+          <strong>
+            {{ profissional().totalClientes }}
+          </strong>
+
           <span>Clientes</span>
+
         </ion-card-content>
+
       </ion-card>
 
+      <!-- Agendamentos -->
       <ion-card class="indicador-card">
+
         <ion-card-content>
-          <strong>{{ profissional.totalAgendamentos }}</strong>
+
+          <strong>
+            {{ profissional().totalAgendamentos }}
+          </strong>
+
           <span>Agendamentos</span>
+
         </ion-card-content>
+
       </ion-card>
 
+      <!-- Avaliação -->
       <ion-card class="indicador-card">
+
         <ion-card-content>
-          <strong>{{ profissional.avaliacao }}</strong>
+
+          <strong>
+            {{ profissional().avaliacao }}
+          </strong>
+
           <span>Avaliação</span>
+
         </ion-card-content>
+
       </ion-card>
 
     </div>
@@ -60,8 +105,13 @@
           </ion-icon>
 
           <ion-label>
+
             <p>E-mail</p>
-            <h3>{{ profissional.email }}</h3>
+
+            <h3>
+              {{ profissional().email || '—' }}
+            </h3>
+
           </ion-label>
 
         </ion-item>
@@ -73,21 +123,31 @@
           </ion-icon>
 
           <ion-label>
+
             <p>Telefone</p>
-            <h3>{{ profissional.telefone }}</h3>
+
+            <h3>
+              {{ profissional().telefone || '—' }}
+            </h3>
+
           </ion-label>
 
         </ion-item>
 
-        <!-- Endereço -->
+        <!-- Profissão -->
         <ion-item class="item-perfil" lines="none">
 
-          <ion-icon name="location-outline" slot="start">
+          <ion-icon name="briefcase-outline" slot="start">
           </ion-icon>
 
           <ion-label class="ion-text-wrap">
-            <p>Endereço</p>
-            <h3>{{ profissional.endereco }}</h3>
+
+            <p>Profissão</p>
+
+            <h3>
+              {{ profissional().profissao || '—' }}
+            </h3>
+
           </ion-label>
 
         </ion-item>
@@ -109,7 +169,9 @@
           <ion-icon name="create-outline" slot="start">
           </ion-icon>
 
-          <ion-label>Editar Perfil</ion-label>
+          <ion-label>
+            Editar Perfil
+          </ion-label>
 
         </ion-item>
 
@@ -119,7 +181,9 @@
           <ion-icon name="notifications-outline" slot="start">
           </ion-icon>
 
-          <ion-label>Notificações</ion-label>
+          <ion-label>
+            Notificações
+          </ion-label>
 
         </ion-item>
 
@@ -129,7 +193,9 @@
           <ion-icon name="key-outline" slot="start">
           </ion-icon>
 
-          <ion-label>Alterar Senha</ion-label>
+          <ion-label>
+            Alterar Senha
+          </ion-label>
 
         </ion-item>
 
@@ -152,5 +218,5 @@
 </ion-content>
 
 <!-- Mensagens temporárias -->
-<ion-toast [isOpen]="toastAberto" [message]="mensagem" [duration]="2500" (didDismiss)="toastAberto = false">
+<ion-toast [isOpen]="toastAberto()" [message]="mensagem()" [duration]="2500" (didDismiss)="toastAberto.set(false)">
 </ion-toast>

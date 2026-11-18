@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  ChangeDetectorRef
+} from '@angular/core';
+
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -8,12 +12,18 @@ import {
   IonInput,
   IonTextarea,
   IonIcon,
-  IonToast
+  IonToast,
+  ToastController
 } from '@ionic/angular';
+
+import { FirebaseError } from 'firebase/app';
 
 import { addIcons } from 'ionicons';
 import { arrowBackOutline } from 'ionicons/icons';
-import { ClientesService } from '../../services/clientes.service';
+
+import {
+  ClientesService
+} from '../../services/clientes.service';
 
 @Component({
   selector: 'app-novo-cliente',
@@ -41,21 +51,33 @@ export class NovoClientePage {
   mensagem = '';
   toastAberto = false;
 
+  // Controlar salvamento
+  salvando = false;
+
   constructor(
     private router: Router,
-    private clientesService: ClientesService
+    private clientesService: ClientesService,
+    private toastController: ToastController,
+    private cdr: ChangeDetectorRef
   ) {
-    addIcons({ arrowBackOutline });
+    addIcons({
+      arrowBackOutline
+    });
   }
 
-  // Formatação automática: DD/MM/AAAA
+  // =====================================
+  // FORMATAR DATA: DD/MM/AAAA
+  // =====================================
+
   formatarDataNascimento(evento: Event): void {
 
     const eventoInput = evento as CustomEvent<{
       value?: string | null;
     }>;
 
-    const numeros = (eventoInput.detail.value ?? '')
+    const numeros = (
+      eventoInput.detail.value ?? ''
+    )
       .replace(/\D/g, '')
       .slice(0, 8);
 
@@ -72,10 +94,14 @@ export class NovoClientePage {
     this.dataNascimento = data;
   }
 
-  // Validação da data de nascimento
+  // =====================================
+  // VALIDAR DATA DE NASCIMENTO
+  // =====================================
+
   private dataValida(data: string): boolean {
 
-    const partes = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(data);
+    const partes =
+      /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(data);
 
     if (!partes) {
       return false;
@@ -85,7 +111,11 @@ export class NovoClientePage {
     const mes = Number(partes[2]);
     const ano = Number(partes[3]);
 
-    const nascimento = new Date(ano, mes - 1, dia);
+    const nascimento = new Date(
+      ano,
+      mes - 1,
+      dia
+    );
 
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
@@ -98,43 +128,67 @@ export class NovoClientePage {
     );
   }
 
-  // Salvar cliente
-  salvarCliente(): void {
+  // =====================================
+  // SALVAR CLIENTE NO FIRESTORE
+  // =====================================
 
-    // Campos obrigatórios
+  async salvarCliente(): Promise<void> {
+
+    // Evitar múltiplos cadastros
+    if (this.salvando) {
+      return;
+    }
+
+    // Validar campos obrigatórios
     if (
       !this.nome.trim() ||
       !this.email.trim() ||
       !this.telefone.trim()
     ) {
+
       this.exibirMensagem(
         'Preencha nome, e-mail e telefone.'
       );
+
       return;
     }
 
     // Validar nome
     if (this.nome.trim().length < 3) {
-      this.exibirMensagem('Digite um nome válido.');
+
+      this.exibirMensagem(
+        'Digite um nome válido.'
+      );
+
       return;
     }
 
     // Validar e-mail
-    const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailValido =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailValido.test(this.email.trim())) {
-      this.exibirMensagem('Digite um e-mail válido.');
+
+      this.exibirMensagem(
+        'Digite um e-mail válido.'
+      );
+
       return;
     }
 
     // Validar telefone
-    const numerosTelefone = this.telefone.replace(/\D/g, '');
+    const numerosTelefone =
+      this.telefone.replace(/\D/g, '');
 
     if (
       numerosTelefone.length !== 10 &&
       numerosTelefone.length !== 11
     ) {
-      this.exibirMensagem('Digite um telefone válido.');
+
+      this.exibirMensagem(
+        'Digite um telefone válido.'
+      );
+
       return;
     }
 
@@ -143,31 +197,104 @@ export class NovoClientePage {
       this.dataNascimento &&
       !this.dataValida(this.dataNascimento)
     ) {
+
       this.exibirMensagem(
         'Informe uma data de nascimento válida.'
       );
+
       return;
     }
 
-    // Cadastro demonstrativo
-    this.clientesService.adicionar({
-      nome: this.nome.trim(),
-      email: this.email.trim().toLowerCase(),
-      telefone: this.telefone.trim(),
-      dataNascimento: this.dataNascimento,
-      observacoes: this.observacoes.trim()
-    });
+    // Iniciar salvamento
+    this.salvando = true;
+    this.cdr.markForCheck();
 
-    // Retornar para a lista
-    this.router.navigateByUrl('/profissional/clientes');
+    try {
+
+      // Salvar cliente no Cloud Firestore
+      await this.clientesService.adicionar({
+
+        nome: this.nome.trim(),
+
+        email: this.email
+          .trim()
+          .toLowerCase(),
+
+        telefone: this.telefone.trim(),
+
+        dataNascimento: this.dataNascimento,
+
+        observacoes: this.observacoes.trim()
+
+      });
+
+      // Confirmar cadastro
+      const toast = await this.toastController.create({
+        message: 'Cliente cadastrado com sucesso!',
+        duration: 2500,
+        position: 'bottom',
+        color: 'success'
+      });
+
+      await toast.present();
+
+      // Voltar à lista após salvar
+      await this.router.navigateByUrl(
+        '/profissional/clientes'
+      );
+
+    } catch (erro) {
+
+      console.error(
+        'Erro ao cadastrar cliente:',
+        erro
+      );
+
+      if (
+        erro instanceof FirebaseError &&
+        erro.code === 'permission-denied'
+      ) {
+
+        this.exibirMensagem(
+          'Sem permissão para cadastrar clientes. Verifique as regras do Firestore.'
+        );
+
+      } else {
+
+        this.exibirMensagem(
+          'Não foi possível salvar o cliente. Tente novamente.'
+        );
+
+      }
+
+    } finally {
+
+      this.salvando = false;
+      this.cdr.markForCheck();
+
+    }
   }
+
+  // =====================================
+  // VOLTAR À LISTA
+  // =====================================
 
   voltar(): void {
-    this.router.navigateByUrl('/profissional/clientes');
+
+    this.router.navigateByUrl(
+      '/profissional/clientes'
+    );
   }
 
+  // =====================================
+  // MENSAGENS DE ERRO
+  // =====================================
+
   private exibirMensagem(texto: string): void {
+
     this.mensagem = texto;
     this.toastAberto = true;
+
+    this.cdr.markForCheck();
   }
 }

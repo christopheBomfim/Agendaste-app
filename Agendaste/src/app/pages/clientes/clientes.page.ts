@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  ChangeDetectorRef
+} from '@angular/core';
+
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -15,6 +19,7 @@ import {
   IonToast
 } from '@ionic/angular';
 
+import { FirebaseError } from 'firebase/app';
 import { addIcons } from 'ionicons';
 
 import {
@@ -22,10 +27,12 @@ import {
   searchOutline
 } from 'ionicons/icons';
 
-import { ClientesService } from '../../services/clientes.service';
+import {
+  ClientesService
+} from '../../services/clientes.service';
 
 interface Cliente {
-  id: number;
+  id: string;
   nome: string;
   telefone: string;
   ultimaVisita: string;
@@ -59,45 +66,12 @@ export class ClientesPage {
   mensagem = '';
   toastAberto = false;
 
-  // Clientes demonstrativos
-  clientes: Cliente[] = [
-    {
-      id: 1,
-      nome: 'Ana Costa',
-      telefone: '(11) 98765-4321',
-      ultimaVisita: '10/03/2024',
-      iniciais: 'AC',
-      cor: 'azul'
-    },
-    {
-      id: 2,
-      nome: 'Carlos Alves',
-      telefone: '(11) 97654-3210',
-      ultimaVisita: '14/03/2024',
-      iniciais: 'CA',
-      cor: 'rosa'
-    },
-    {
-      id: 3,
-      nome: 'Mariana Silva',
-      telefone: '(11) 96543-2109',
-      ultimaVisita: '12/03/2024',
-      iniciais: 'MS',
-      cor: 'verde'
-    },
-    {
-      id: 4,
-      nome: 'Roberto Souza',
-      telefone: '(11) 95432-1098',
-      ultimaVisita: '08/03/2024',
-      iniciais: 'RS',
-      cor: 'amarelo'
-    }
-  ];
+  carregando = false;
 
   constructor(
     private router: Router,
-    private clientesService: ClientesService
+    private clientesService: ClientesService,
+    private cdr: ChangeDetectorRef
   ) {
     addIcons({
       addCircleOutline,
@@ -105,31 +79,105 @@ export class ClientesPage {
     });
   }
 
-  // Clientes demonstrativos + novos cadastros
+  // =====================================
+  // CARREGAR CLIENTES AO ABRIR A PÁGINA
+  // =====================================
+
+  ionViewWillEnter(): void {
+    void this.carregarClientes();
+  }
+
+  async carregarClientes(): Promise<void> {
+
+    this.carregando = true;
+    this.cdr.markForCheck();
+
+    try {
+
+      await this.clientesService.carregar();
+
+    } catch (erro) {
+
+      console.error(
+        'Erro ao carregar clientes:',
+        erro
+      );
+
+      if (
+        erro instanceof FirebaseError &&
+        erro.code === 'permission-denied'
+      ) {
+
+        this.exibirMensagem(
+          'Sem permissão para consultar os clientes.'
+        );
+
+      } else {
+
+        this.exibirMensagem(
+          'Não foi possível carregar os clientes.'
+        );
+
+      }
+
+    } finally {
+
+      this.carregando = false;
+      this.cdr.markForCheck();
+
+    }
+  }
+
+  // =====================================
+  // CLIENTES DO FIRESTORE + PESQUISA
+  // =====================================
+
   get clientesFiltrados(): Cliente[] {
 
-    const novos: Cliente[] = this.clientesService
+    const cores: Cliente['cor'][] = [
+      'azul',
+      'rosa',
+      'verde',
+      'amarelo'
+    ];
+
+    const todos: Cliente[] = this.clientesService
       .listar()
-      .map(cliente => ({
+      .map((cliente, indice) => ({
+
         id: cliente.id,
+
         nome: cliente.nome,
+
         telefone: cliente.telefone,
+
         ultimaVisita: 'Sem visitas',
-        iniciais: this.obterIniciais(cliente.nome),
-        cor: 'azul'
+
+        iniciais: this.obterIniciais(
+          cliente.nome
+        ),
+
+        cor: cores[indice % cores.length]
+
       }));
 
-    const todos = [...this.clientes, ...novos];
-
-    const busca = this.normalizar(this.termoBusca || '');
+    const busca = this.normalizar(
+      this.termoBusca || ''
+    );
 
     if (!busca) {
       return todos;
     }
 
     return todos.filter(cliente => {
-      const nome = this.normalizar(cliente.nome);
-      const telefone = this.normalizar(cliente.telefone);
+
+      const nome = this.normalizar(
+        cliente.nome
+      );
+
+      const telefone = this.normalizar(
+        cliente.telefone
+      );
 
       return (
         nome.includes(busca) ||
@@ -138,18 +186,26 @@ export class ClientesPage {
     });
   }
 
-  // Gerar iniciais para o avatar
+  // =====================================
+  // GERAR INICIAIS PARA O AVATAR
+  // =====================================
+
   private obterIniciais(nome: string): string {
 
     return nome
       .trim()
       .split(/\s+/)
       .slice(0, 2)
-      .map(parte => parte.charAt(0).toUpperCase())
+      .map(parte =>
+        parte.charAt(0).toUpperCase()
+      )
       .join('');
   }
 
-  // Normalizar texto da pesquisa
+  // =====================================
+  // NORMALIZAR TEXTO DA PESQUISA
+  // =====================================
+
   private normalizar(texto: string): string {
 
     return texto
@@ -159,20 +215,37 @@ export class ClientesPage {
       .replace(/[^a-z0-9]/g, '');
   }
 
-  // Detalhes do cliente (próxima etapa)
+  // =====================================
+  // DETALHES DO CLIENTE
+  // =====================================
+
   consultarCliente(cliente: Cliente): void {
+
     this.exibirMensagem(
       `Detalhes de ${cliente.nome} serão implementados depois.`
     );
   }
 
-  // Abrir formulário Novo Cliente
+  // =====================================
+  // ABRIR FORMULÁRIO NOVO CLIENTE
+  // =====================================
+
   novoCliente(): void {
-    this.router.navigateByUrl('/novo-cliente');
+
+    this.router.navigateByUrl(
+      '/novo-cliente'
+    );
   }
 
+  // =====================================
+  // EXIBIR MENSAGENS
+  // =====================================
+
   private exibirMensagem(texto: string): void {
+
     this.mensagem = texto;
     this.toastAberto = true;
+
+    this.cdr.markForCheck();
   }
 }

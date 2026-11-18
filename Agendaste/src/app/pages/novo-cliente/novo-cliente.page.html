@@ -69,9 +69,9 @@
       </div>
 
       <!-- Salvar Cliente -->
-      <ion-button class="botao-salvar" expand="block" type="submit">
+      <ion-button class="botao-salvar" expand="block" type="submit" [disabled]="salvando">
 
-        Salvar Cliente
+        {{ salvando ? 'Salvando...' : 'Salvar Cliente' }}
 
       </ion-button>
 

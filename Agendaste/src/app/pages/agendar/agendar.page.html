@@ -19,15 +19,38 @@
     <!-- Selecionar cliente -->
     <div class="campo-formulario">
 
-      <label for="cliente">Buscar Cliente</label>
+      <label for="cliente">
+        Buscar Cliente
+      </label>
+
+      <!-- Estado de carregamento -->
+      @if (carregandoClientes) {
+
+      <p>Carregando clientes...</p>
+
+      } @else if (
+      clientesCarregados &&
+      clientes.length === 0
+      ) {
+
+      <p>
+        Nenhum cliente cadastrado.
+        Cadastre um cliente antes de agendar.
+      </p>
+
+      }
 
       <ion-select id="cliente" aria-label="Buscar Cliente" fill="outline" interface="popover"
-        placeholder="Selecione o cliente..." [(ngModel)]="clienteSelecionado">
+        placeholder="Selecione o cliente..." [(ngModel)]="clienteSelecionado"
+        [disabled]="carregandoClientes || !clientesCarregados || clientes.length === 0">
 
+        <!-- Clientes reais do Firestore -->
         @for (cliente of clientes; track cliente.id) {
 
         <ion-select-option [value]="cliente.id">
+
           {{ cliente.nome }}
+
         </ion-select-option>
 
         }
@@ -67,6 +90,7 @@
 
         <div class="navegacao-datas">
 
+          <!-- Dias anteriores -->
           <ion-button fill="clear" aria-label="Dias anteriores" [disabled]="grupoDias === 0" (click)="semanaAnterior()">
 
             <ion-icon name="chevron-back-outline" slot="icon-only">
@@ -74,8 +98,12 @@
 
           </ion-button>
 
-          <span>{{ periodoExibido }}</span>
+          <!-- Mês exibido -->
+          <span>
+            {{ periodoExibido }}
+          </span>
 
+          <!-- Próximos dias -->
           <ion-button fill="clear" aria-label="Próximos dias" [disabled]="!possuiProximoGrupo"
             (click)="proximaSemana()">
 
@@ -97,8 +125,15 @@
           (click)="selecionarDia(dia.iso)">
 
           <div class="conteudo-dia">
-            <span>{{ dia.semana }}</span>
-            <strong>{{ dia.numero }}</strong>
+
+            <span>
+              {{ dia.semana }}
+            </span>
+
+            <strong>
+              {{ dia.numero }}
+            </strong>
+
           </div>
 
         </ion-button>
@@ -109,7 +144,7 @@
 
     </section>
 
-    <!-- Horários -->
+    <!-- Horários disponíveis -->
     <section class="secao-horarios">
 
       <h2>Horários Disponíveis</h2>
@@ -131,12 +166,25 @@
 
     </section>
 
-    <!-- Confirmar -->
-    <ion-button class="botao-confirmar" expand="block" (click)="confirmarAgendamento()">
+    <!-- Confirmar agendamento -->
 
-      Confirmar Agendamento
+    <ion-button class="botao-confirmar" expand="block" [disabled]="
+    salvando ||
+    carregandoClientes ||
+    carregandoAgendamentos ||
+    !clientesCarregados ||
+    !agendamentosCarregados ||
+    clientes.length === 0
+  " (click)="confirmarAgendamento()">
+
+      {{
+      salvando
+      ? 'Salvando agendamento...'
+      : 'Confirmar Agendamento'
+      }}
 
     </ion-button>
+
 
   </div>
 

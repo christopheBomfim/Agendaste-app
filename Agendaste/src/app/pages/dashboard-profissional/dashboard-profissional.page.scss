@@ -212,3 +212,26 @@
         padding: 7px 8px;
     }
 }
+
+
+/* Mensagem de erro ao carregar perfil */
+
+.mensagem-erro {
+  color: #dc3545 !important;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+/* Lista vazia de agendamentos */
+
+.sem-agendamentos {
+  text-align: center;
+  padding: 30px 16px;
+
+  p {
+    color: #707787;
+    font-size: 14px;
+    margin: 0;
+  }
+}

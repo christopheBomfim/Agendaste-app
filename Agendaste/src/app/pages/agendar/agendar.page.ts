@@ -1,5 +1,8 @@
+import {
+  Component,
+  ChangeDetectorRef
+} from '@angular/core';
 
-import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -30,7 +33,7 @@ import {
 } from '../../services/agendamentos.service';
 
 interface ClienteSelecao {
-  id: number;
+  id: string;
   nome: string;
 }
 
@@ -57,10 +60,25 @@ interface DiaAgenda {
 })
 export class AgendarPage {
 
-  // Cliente selecionado
-  clienteSelecionado: number | null = null;
 
-  // Tipos de serviço
+  carregandoAgendamentos = false;
+  agendamentosCarregados = false;
+  salvando = false;
+
+
+  // =====================================
+  // SELEÇÃO DO CLIENTE
+  // =====================================
+
+  clienteSelecionado: string | null = null;
+
+  carregandoClientes = false;
+  clientesCarregados = false;
+
+  // =====================================
+  // TIPOS DE SERVIÇO
+  // =====================================
+
   tiposServico: TipoServico[] = [
     'Consulta',
     'Retorno',
@@ -69,7 +87,10 @@ export class AgendarPage {
 
   tipoSelecionado: TipoServico = 'Consulta';
 
-  // Horários demonstrativos
+  // =====================================
+  // HORÁRIOS DEMONSTRATIVOS
+  // =====================================
+
   horarios: string[] = [
     '08:30',
     '09:15',
@@ -81,30 +102,30 @@ export class AgendarPage {
 
   horarioSelecionado = '';
 
-  // Calendário
+  // =====================================
+  // CALENDÁRIO
+  // =====================================
+
   dias: DiaAgenda[] = this.gerarDiasUteis(60);
 
   grupoDias = 0;
 
   dataSelecionada: string = this.dias[0].iso;
 
-  // Mensagens
+  // =====================================
+  // MENSAGENS
+  // =====================================
+
   mensagem = '';
   toastAberto = false;
-
-  // Clientes demonstrativos do PDF
-  private clientesDemo: ClienteSelecao[] = [
-    { id: 1, nome: 'Ana Costa' },
-    { id: 2, nome: 'Carlos Alves' },
-    { id: 3, nome: 'Mariana Silva' },
-    { id: 4, nome: 'Roberto Souza' }
-  ];
 
   constructor(
     private router: Router,
     private clientesService: ClientesService,
-    private agendamentosService: AgendamentosService
+    private agendamentosService: AgendamentosService,
+    private cdr: ChangeDetectorRef
   ) {
+
     addIcons({
       arrowBackOutline,
       chevronBackOutline,
@@ -112,24 +133,121 @@ export class AgendarPage {
     });
   }
 
-  // Clientes disponíveis
+  // =====================================
+  // CARREGAR CLIENTES AO ABRIR A PÁGINA
+  // =====================================
+
+  ionViewWillEnter(): void {
+    void this.carregarClientes();
+    void this.carregarAgendamentos();
+  }
+
+  async carregarClientes(): Promise<void> {
+
+    this.carregandoClientes = true;
+    this.clientesCarregados = false;
+
+    this.cdr.markForCheck();
+
+    try {
+
+      // Buscar clientes do profissional no Firestore
+      await this.clientesService.carregar();
+
+      this.clientesCarregados = true;
+
+      // Verificar se o cliente selecionado ainda existe
+      if (
+        this.clienteSelecionado !== null &&
+        !this.clientes.some(
+          cliente => cliente.id === this.clienteSelecionado
+        )
+      ) {
+        this.clienteSelecionado = null;
+      }
+
+    } catch (erro) {
+
+      console.error(
+        'Erro ao carregar clientes:',
+        erro
+      );
+
+      this.exibirMensagem(
+        'Não foi possível carregar os clientes do Firebase.'
+      );
+
+    } finally {
+
+      this.carregandoClientes = false;
+
+      this.cdr.markForCheck();
+    }
+  }
+
+  // =====================================
+  // CARREGAR AGENDAMENTOS AO ABRIR A PÁGINA
+  // =====================================
+
+  async carregarAgendamentos(): Promise<void> {
+
+    this.carregandoAgendamentos = true;
+    this.agendamentosCarregados = false;
+
+    this.cdr.markForCheck();
+
+    try {
+
+      await this.agendamentosService.carregar();
+
+      this.agendamentosCarregados = true;
+
+    } catch (erro) {
+
+      console.error(
+        'Erro ao carregar agendamentos:',
+        erro
+      );
+
+      this.exibirMensagem(
+        'Não foi possível consultar os horários reservados.'
+      );
+
+    } finally {
+
+      this.carregandoAgendamentos = false;
+      this.cdr.markForCheck();
+
+    }
+  }
+
+
+  // =====================================
+  // CLIENTES DISPONÍVEIS NO FIRESTORE
+  // =====================================
+
   get clientes(): ClienteSelecao[] {
 
-    const novosClientes = this.clientesService
+    // Não exibir dados antigos se a consulta falhar
+    if (!this.clientesCarregados) {
+      return [];
+    }
+
+    return this.clientesService
       .listar()
       .map(cliente => ({
         id: cliente.id,
         nome: cliente.nome
       }));
-
-    return [
-      ...this.clientesDemo,
-      ...novosClientes
-    ];
   }
 
-  // Gerar próximos dias úteis
-  private gerarDiasUteis(quantidade: number): DiaAgenda[] {
+  // =====================================
+  // GERAR PRÓXIMOS DIAS ÚTEIS
+  // =====================================
+
+  private gerarDiasUteis(
+    quantidade: number
+  ): DiaAgenda[] {
 
     const resultado: DiaAgenda[] = [];
 
@@ -150,40 +268,70 @@ export class AgendarPage {
 
       const diaSemana = data.getDay();
 
-      // Segunda a sexta
-      if (diaSemana !== 0 && diaSemana !== 6) {
+      // Segunda a sexta-feira
+      if (
+        diaSemana !== 0 &&
+        diaSemana !== 6
+      ) {
 
         const ano = data.getFullYear();
-        const mes = String(data.getMonth() + 1).padStart(2, '0');
-        const dia = String(data.getDate()).padStart(2, '0');
+
+        const mes = String(
+          data.getMonth() + 1
+        ).padStart(2, '0');
+
+        const dia = String(
+          data.getDate()
+        ).padStart(2, '0');
 
         resultado.push({
+
           iso: `${ano}-${mes}-${dia}`,
+
           numero: data.getDate(),
+
           semana: nomesSemana[diaSemana]
+
         });
       }
 
+      // Avançar um dia
       data.setDate(data.getDate() + 1);
     }
 
     return resultado;
   }
 
-  // Grupo de cinco dias exibidos
+  // =====================================
+  // CINCO DIAS POR GRUPO
+  // =====================================
+
   get diasExibidos(): DiaAgenda[] {
 
     const inicio = this.grupoDias * 5;
 
-    return this.dias.slice(inicio, inicio + 5);
+    return this.dias.slice(
+      inicio,
+      inicio + 5
+    );
   }
 
-  // Verificar se existem mais dias
+  // =====================================
+  // VERIFICAR PRÓXIMO GRUPO
+  // =====================================
+
   get possuiProximoGrupo(): boolean {
-    return (this.grupoDias + 1) * 5 < this.dias.length;
+
+    return (
+      (this.grupoDias + 1) * 5 <
+      this.dias.length
+    );
   }
 
-  // Mês exibido no calendário
+  // =====================================
+  // MÊS EXIBIDO
+  // =====================================
+
   get periodoExibido(): string {
 
     const primeiroDia = this.diasExibidos[0];
@@ -196,85 +344,163 @@ export class AgendarPage {
       .split('-')
       .map(Number);
 
-    const data = new Date(ano, mes - 1, dia);
+    const data = new Date(
+      ano,
+      mes - 1,
+      dia
+    );
 
-    return new Intl.DateTimeFormat('pt-BR', {
-      month: 'long',
-      year: 'numeric'
-    }).format(data);
+    return new Intl.DateTimeFormat(
+      'pt-BR',
+      {
+        month: 'long',
+        year: 'numeric'
+      }
+    ).format(data);
   }
 
-  // Voltar cinco dias úteis
+  // =====================================
+  // SEMANA ANTERIOR
+  // =====================================
+
   semanaAnterior(): void {
 
     if (this.grupoDias > 0) {
+
       this.grupoDias--;
-      this.selecionarDia(this.diasExibidos[0].iso);
+
+      this.selecionarDia(
+        this.diasExibidos[0].iso
+      );
     }
   }
 
-  // Avançar cinco dias úteis
+  // =====================================
+  // PRÓXIMA SEMANA
+  // =====================================
+
   proximaSemana(): void {
 
     if (this.possuiProximoGrupo) {
+
       this.grupoDias++;
-      this.selecionarDia(this.diasExibidos[0].iso);
+
+      this.selecionarDia(
+        this.diasExibidos[0].iso
+      );
     }
   }
 
-  // Selecionar tipo de serviço
-  selecionarTipo(tipo: TipoServico): void {
+  // =====================================
+  // SELECIONAR TIPO DE SERVIÇO
+  // =====================================
+
+  selecionarTipo(
+    tipo: TipoServico
+  ): void {
+
     this.tipoSelecionado = tipo;
   }
 
-  // Selecionar dia
+  // =====================================
+  // SELECIONAR DIA
+  // =====================================
+
   selecionarDia(data: string): void {
+
     this.dataSelecionada = data;
+
+    // Limpar horário ao trocar a data
     this.horarioSelecionado = '';
   }
 
-  // Verificar horários indisponíveis
-  horarioIndisponivel(horario: string): boolean {
+  // =====================================
+  // VERIFICAR HORÁRIOS INDISPONÍVEIS
+  // =====================================
+
+
+  horarioIndisponivel(
+    horario: string
+  ): boolean {
+
+    // Enquanto a agenda não foi carregada,
+    // não podemos confirmar disponibilidade.
+    if (!this.agendamentosCarregados) {
+      return true;
+    }
 
     const dataHora = new Date(
       `${this.dataSelecionada}T${horario}:00`
     );
 
-    // Não permitir horários passados
     if (dataHora.getTime() <= Date.now()) {
       return true;
     }
 
-    // Verificar horário já reservado
     return this.agendamentosService.horarioOcupado(
       this.dataSelecionada,
       horario
     );
   }
 
-  // Selecionar horário
-  selecionarHorario(horario: string): void {
 
-    if (!this.horarioIndisponivel(horario)) {
+  // =====================================
+  // SELECIONAR HORÁRIO
+  // =====================================
+
+  selecionarHorario(
+    horario: string
+  ): void {
+
+    if (
+      !this.horarioIndisponivel(horario)
+    ) {
+
       this.horarioSelecionado = horario;
     }
   }
 
-  // Confirmar agendamento
-  confirmarAgendamento(): void {
+  // =====================================
+  // CONFIRMAR AGENDAMENTO
+  // =====================================
 
-    if (this.clienteSelecionado === null) {
+
+  async confirmarAgendamento(): Promise<void> {
+
+    if (this.salvando) {
+      return;
+    }
+
+    if (
+      !this.clientesCarregados ||
+      !this.agendamentosCarregados
+    ) {
+      this.exibirMensagem(
+        'Aguarde o carregamento dos dados.'
+      );
+      return;
+    }
+
+    if (!this.clienteSelecionado) {
       this.exibirMensagem('Selecione um cliente.');
       return;
     }
 
     if (!this.horarioSelecionado) {
-      this.exibirMensagem('Selecione um horário disponível.');
+      this.exibirMensagem(
+        'Selecione um horário disponível.'
+      );
       return;
     }
 
-    if (this.horarioIndisponivel(this.horarioSelecionado)) {
-      this.exibirMensagem('Este horário não está disponível.');
+    if (
+      this.horarioIndisponivel(
+        this.horarioSelecionado
+      )
+    ) {
+      this.exibirMensagem(
+        'Este horário não está disponível.'
+      );
       return;
     }
 
@@ -287,36 +513,83 @@ export class AgendarPage {
       return;
     }
 
-    const criado = this.agendamentosService.criar({
-      clienteId: cliente.id,
-      clienteNome: cliente.nome,
-      tipoServico: this.tipoSelecionado,
-      data: this.dataSelecionada,
-      horario: this.horarioSelecionado
-    });
+    this.salvando = true;
+    this.cdr.markForCheck();
 
-    if (!criado) {
-      this.exibirMensagem('Este horário já está reservado.');
-      return;
+    try {
+
+      const criado =
+        await this.agendamentosService.criar({
+          clienteId: cliente.id,
+          clienteNome: cliente.nome,
+          tipoServico: this.tipoSelecionado,
+          data: this.dataSelecionada,
+          horario: this.horarioSelecionado
+        });
+
+      if (!criado) {
+
+        this.exibirMensagem(
+          'Este horário já está reservado.'
+        );
+
+        // Recarregar os horários
+        await this.carregarAgendamentos();
+
+        return;
+      }
+
+      this.exibirMensagem(
+        'Agendamento salvo no Firebase! Status: Pendente.'
+      );
+
+      this.clienteSelecionado = null;
+      this.tipoSelecionado = 'Consulta';
+      this.horarioSelecionado = '';
+
+    } catch (erro) {
+
+      console.error(
+        'Erro ao criar agendamento:',
+        erro
+      );
+
+      this.exibirMensagem(
+        'Não foi possível salvar o agendamento.'
+      );
+
+    } finally {
+
+      this.salvando = false;
+      this.cdr.markForCheck();
+
     }
-
-    this.exibirMensagem(
-      'Agendamento criado com sucesso! Status: Pendente.'
-    );
-
-    // Limpar seleção para novo agendamento
-    this.clienteSelecionado = null;
-    this.tipoSelecionado = 'Consulta';
-    this.horarioSelecionado = '';
   }
 
-  // Voltar ao Dashboard
+
+  // =====================================
+  // VOLTAR AO DASHBOARD
+  // =====================================
+
   voltar(): void {
-    this.router.navigateByUrl('/profissional/inicio');
+
+    this.router.navigateByUrl(
+      '/profissional/inicio'
+    );
   }
 
-  private exibirMensagem(texto: string): void {
+  // =====================================
+  // EXIBIR MENSAGENS
+  // =====================================
+
+  private exibirMensagem(
+    texto: string
+  ): void {
+
     this.mensagem = texto;
+
     this.toastAberto = true;
+
+    this.cdr.markForCheck();
   }
 }

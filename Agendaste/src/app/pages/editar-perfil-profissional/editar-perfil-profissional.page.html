@@ -1,97 +1,250 @@
 <ion-header class="ion-no-border">
+
   <div class="header-container">
+
     <ion-toolbar class="custom-toolbar">
+
       <ion-buttons slot="start">
-        <ion-back-button defaultHref="/profissional/perfil" icon="arrow-back-outline" text=""></ion-back-button>
+
+        <ion-back-button defaultHref="/profissional/perfil" icon="arrow-back-outline" text="">
+        </ion-back-button>
+
       </ion-buttons>
-      <ion-title class="page-title">Editar Perfil</ion-title>
+
+      <ion-title class="page-title">
+        Editar Perfil
+      </ion-title>
+
     </ion-toolbar>
+
   </div>
+
 </ion-header>
 
 <ion-content class="ion-padding">
+
   <div class="editar-perfil-container">
-    
-    <!-- Seção da Foto de Perfil -->
+
+    <!-- Foto de Perfil -->
     <div class="photo-section">
+
       <div class="avatar-container">
+
         <img src="assets/images/doctor-avatar.png" alt="Foto de perfil" class="profile-avatar" />
+
       </div>
+
       <ion-button fill="clear" size="small" class="change-photo-btn" (click)="alterarFoto()">
+
         Alterar foto de perfil
+
       </ion-button>
+
     </div>
 
+    @if (carregando) {
+    <p class="ion-text-center">
+      Carregando informações...
+    </p>
+    }
+
     <!-- Formulário de Edição -->
-    <form class="form-container">
-      
+    <form class="form-container" (ngSubmit)="salvarAlteracoes()">
+
+      <!-- Nome Completo -->
+      <div class="field-group">
+
+        <ion-label class="field-label">
+          Nome Completo
+        </ion-label>
+
+        <div class="custom-input-item">
+
+          <ion-icon name="person-outline" class="input-icon">
+          </ion-icon>
+
+          <ion-input type="text" name="nome" [(ngModel)]="perfil.nome" placeholder="Seu nome completo">
+          </ion-input>
+
+        </div>
+
+      </div>
+
+      <!-- Profissão -->
+      <div class="field-group">
+
+        <ion-label class="field-label">
+          Profissão
+        </ion-label>
+
+        <div class="custom-input-item">
+
+          <ion-icon name="briefcase-outline" class="input-icon">
+          </ion-icon>
+
+          <ion-input type="text" name="profissao" [(ngModel)]="perfil.profissao" placeholder="Sua profissão">
+          </ion-input>
+
+        </div>
+
+      </div>
+
       <!-- Especialidade -->
       <div class="field-group">
-        <ion-label class="field-label">Especialidade</ion-label>
+
+        <ion-label class="field-label">
+          Especialidade
+        </ion-label>
+
         <div class="custom-input-item">
-          <ion-icon name="medical-outline" class="input-icon"></ion-icon>
-          <ion-input type="text" value="Cardiologia" placeholder="Sua especialidade"></ion-input>
+
+          <ion-icon name="medical-outline" class="input-icon">
+          </ion-icon>
+
+          <ion-input type="text" name="especialidade" [(ngModel)]="perfil.especialidade"
+            placeholder="Sua especialidade">
+          </ion-input>
+
         </div>
+
       </div>
 
       <!-- Horário Disponível -->
       <div class="field-group">
-        <ion-label class="field-label">Horário Disponível</ion-label>
+
+        <ion-label class="field-label">
+          Horário Disponível
+        </ion-label>
+
         <div class="time-grid">
+
+          <!-- Horário Inicial -->
           <div class="custom-input-item">
-            <ion-icon name="time-outline" class="input-icon"></ion-icon>
-            <ion-input type="text" value="08:00"></ion-input>
+
+            <ion-icon name="time-outline" class="input-icon">
+            </ion-icon>
+
+            <ion-input type="text" name="horarioInicio" [(ngModel)]="perfil.horarioInicio" placeholder="08:00">
+            </ion-input>
+
           </div>
+
+          <!-- Horário Final -->
           <div class="custom-input-item">
-            <ion-icon name="time-outline" class="input-icon"></ion-icon>
-            <ion-input type="text" value="18:00"></ion-input>
+
+            <ion-icon name="time-outline" class="input-icon">
+            </ion-icon>
+
+            <ion-input type="text" name="horarioFim" [(ngModel)]="perfil.horarioFim" placeholder="18:00">
+            </ion-input>
+
           </div>
+
         </div>
+
       </div>
 
       <!-- Telefone -->
       <div class="field-group">
-        <ion-label class="field-label">Telefone</ion-label>
+
+        <ion-label class="field-label">
+          Telefone
+        </ion-label>
+
         <div class="custom-input-item">
-          <ion-icon name="call-outline" class="input-icon"></ion-icon>
-          <ion-input type="tel" value="(11) 98765-4321" placeholder="(00) 00000-0000"></ion-input>
+
+          <ion-icon name="call-outline" class="input-icon">
+          </ion-icon>
+
+          <ion-input type="tel" name="telefone" [(ngModel)]="perfil.telefone" placeholder="(00) 00000-0000">
+          </ion-input>
+
         </div>
+
       </div>
 
       <!-- Registro Profissional -->
       <div class="field-group">
-        <ion-label class="field-label">Registro Profissional</ion-label>
+
+        <ion-label class="field-label">
+          Registro Profissional
+        </ion-label>
+
         <div class="registration-grid">
+
+          <!-- Tipo de Conselho -->
           <div class="custom-select-item">
-            <ion-select interface="popover" value="CRM" toggleIcon="caret-down-sharp">
-              <ion-select-option value="CRM">CRM</ion-select-option>
-              <ion-select-option value="CRO">CRO</ion-select-option>
-              <ion-select-option value="CRP">CRP</ion-select-option>
+
+            <ion-select name="tipoConselho" interface="popover" [(ngModel)]="perfil.tipoConselho" placeholder="Conselho"
+              toggleIcon="caret-down-sharp">
+
+              <ion-select-option value="CRM">
+                CRM
+              </ion-select-option>
+
+              <ion-select-option value="CRO">
+                CRO
+              </ion-select-option>
+
+              <ion-select-option value="CRP">
+                CRP
+              </ion-select-option>
+
             </ion-select>
+
           </div>
 
+          <!-- Estado do Conselho -->
           <div class="custom-select-item">
-            <ion-select interface="popover" value="SP" toggleIcon="caret-down-sharp">
-              <ion-select-option value="SP">SP</ion-select-option>
-              <ion-select-option value="MG">MG</ion-select-option>
-              <ion-select-option value="RJ">RJ</ion-select-option>
+
+            <ion-select name="ufConselho" interface="popover" [(ngModel)]="perfil.ufConselho" placeholder="UF"
+              toggleIcon="caret-down-sharp">
+
+              <ion-select-option value="SP">
+                SP
+              </ion-select-option>
+
+              <ion-select-option value="MG">
+                MG
+              </ion-select-option>
+
+              <ion-select-option value="RJ">
+                RJ
+              </ion-select-option>
+
             </ion-select>
+
           </div>
 
+          <!-- Número do Registro -->
           <div class="custom-input-item number-input">
-            <ion-input type="text" value="123456" placeholder="Número"></ion-input>
+
+            <ion-input type="text" name="numeroRegistro" [(ngModel)]="perfil.numeroRegistro" placeholder="Número">
+            </ion-input>
+
           </div>
+
         </div>
+
       </div>
 
-      <!-- Botão de Salvar Alterações -->
+      <!-- Salvar Alterações -->
       <div class="action-container">
-        <ion-button expand="block" class="btn-save" (click)="salvarAlteracoes()">
-          Salvar Alterações
+
+        <ion-button type="submit" expand="block" class="btn-save" [disabled]="salvando || carregando">
+
+          {{
+          salvando
+          ? 'Salvando...'
+          : 'Salvar Alterações'
+          }}
+
         </ion-button>
+
       </div>
 
     </form>
 
   </div>
+
 </ion-content>

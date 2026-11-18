@@ -6,12 +6,37 @@
     <div class="cabecalho-dashboard">
 
       <div class="saudacao">
-        <h1>Olá, {{ nomeProfissional }}</h1>
+
+        <!-- Nome carregado do Firebase -->
+        <h1>Olá, {{ nomeProfissional() }}</h1>
+
+        <!-- Data atual -->
         <p>{{ dataAtual }}</p>
+
+        <!-- Mensagem de erro ao carregar perfil -->
+        @if (erroPerfil()) {
+        <p class="mensagem-erro">
+          {{ erroPerfil() }}
+        </p>
+        }
+
+        <!-- Mensagem de erro ao carregar agendamentos -->
+
+        @if (erroAgendamentos()) {
+        <p class="mensagem-erro">
+          {{ erroAgendamentos() }}
+        </p>
+        }
+
       </div>
 
+      <!-- Avatar do profissional -->
       <ion-avatar class="foto-perfil" (click)="irParaPerfil()" style="cursor: pointer;" aria-label="Ir para perfil">
-        <div class="avatar-iniciais">MS</div>
+
+        <div class="avatar-iniciais">
+          {{ iniciaisProfissional() }}
+        </div>
+
       </ion-avatar>
 
     </div>
@@ -21,11 +46,15 @@
 
       @for (indicador of indicadores; track indicador.titulo) {
 
-      <ion-card class="indicador-card" [class.destaque]="indicador.destaque" (click)="clicarIndicador(indicador.titulo)" style="cursor: pointer;">
+      <ion-card class="indicador-card" [class.destaque]="indicador.destaque" (click)="clicarIndicador(indicador.titulo)"
+        style="cursor: pointer;">
 
         <ion-card-content>
+
           <p>{{ indicador.titulo }}</p>
+
           <h2>{{ indicador.valor }}</h2>
+
         </ion-card-content>
 
       </ion-card>
@@ -34,7 +63,7 @@
 
     </div>
 
-    <!-- Próximos agendamentos -->
+    <!-- Próximos Agendamentos -->
     <section class="secao-agendamentos">
 
       <h2>Próximos Agendamentos</h2>
@@ -47,20 +76,26 @@
 
           <ion-card-content>
 
+            <!-- Informações -->
             <div class="agendamento-info">
 
               <h3>{{ agendamento.cliente }}</h3>
 
               <div class="detalhes-agendamento">
+
                 <span>{{ agendamento.servico }}</span>
+
                 <span class="separador">•</span>
+
                 <span class="horario">
                   {{ agendamento.horario }}
                 </span>
+
               </div>
 
             </div>
 
+            <!-- Status -->
             <ion-badge class="status" [class.confirmado]="agendamento.status === 'Confirmado'"
               [class.pendente]="agendamento.status === 'Pendente'">
 
@@ -71,6 +106,13 @@
           </ion-card-content>
 
         </ion-card>
+
+        } @empty {
+
+        <!-- Nenhum agendamento -->
+        <div class="sem-agendamentos">
+          <p>Nenhum agendamento encontrado.</p>
+        </div>
 
         }
 

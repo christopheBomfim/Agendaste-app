@@ -1,18 +1,12 @@
-
 <ion-header class="cabecalho-cadastro">
   <ion-toolbar>
 
     <div class="barra-superior">
 
       <!-- Botão circular de voltar -->
-      <ion-button
-        class="botao-voltar"
-        (click)="voltar()"
-        aria-label="Voltar">
+      <ion-button class="botao-voltar" (click)="voltar()" aria-label="Voltar">
 
-        <ion-icon
-          slot="icon-only"
-          name="arrow-back-outline">
+        <ion-icon slot="icon-only" name="arrow-back-outline">
         </ion-icon>
 
       </ion-button>
@@ -123,9 +117,13 @@
       </div>
 
       <!-- Criar conta -->
-      <ion-button class="botao-criar" expand="block" type="submit">
-        Criar conta profissional
+
+      <ion-button class="botao-criar" expand="block" type="submit" [disabled]="salvando">
+
+        {{ salvando ? 'Cadastrando...' : 'Criar conta profissional' }}
+
       </ion-button>
+
 
       <!-- Voltar ao login -->
       <ion-button class="botao-login" expand="block" fill="clear" type="button" (click)="voltar()">

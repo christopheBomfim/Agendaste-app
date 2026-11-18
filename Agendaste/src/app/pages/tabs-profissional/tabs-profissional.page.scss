@@ -1,38 +1,165 @@
-ion-tab-bar {
-    max-width: 420px;
-    width: 100%;
-    margin: 0 auto;
-    box-sizing: border-box;
-    --background: #f7f8fc;
-    --border: none;
 
-    height: 70px;
-    padding: 6px 4px;
-    border-top: none;
-    box-shadow: none;
+/* ==========================================
+   CONTAINER PRINCIPAL
+========================================== */
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #f7f8fc;
 }
 
+ion-tabs {
+  width: 100%;
+  height: 100%;
+  background: #f7f8fc;
+}
+
+/* ==========================================
+   BARRA DE NAVEGAÇÃO INFERIOR
+========================================== */
+
+ion-tab-bar {
+  /* Ocupa toda a largura disponível */
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+
+  /* Fundo padrão do Agendaste? */
+  --background: #f7f8fc;
+  --border: 0;
+
+  background: #f7f8fc;
+
+  /* Remove linhas e sombras */
+  border: none !important;
+  border-top: none !important;
+  box-shadow: none !important;
+
+  /* Dimensões */
+  height: 70px;
+  padding: 6px 4px;
+  margin: 0;
+
+  /* Centraliza os botões */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ==========================================
+   BOTÕES DA NAVEGAÇÃO
+========================================== */
+
 ion-tab-button {
-    --background: #f7f8fc;
+  /* Mantém os quatro botões centralizados */
+  flex: 0 1 105px;
+  min-width: 0;
+  max-width: 105px;
 
-    --color: #707787;
-    --color-selected: #cf25dc;
+  /* Cores */
+  --background: #f7f8fc;
+  --background-focused: #f7f8fc;
 
+  --color: #707787;
+  --color-selected: #cf25dc;
+
+  /* Remove bordas e sombras */
+  border: none;
+  box-shadow: none;
+
+  /* Tipografia */
+  font-size: 12px;
+  font-weight: 500;
+
+  /* Ícones */
+  ion-icon {
+    font-size: 25px;
+    margin-bottom: 4px;
+  }
+
+  /* Texto */
+  ion-label {
     font-size: 12px;
-    font-weight: 500;
+  }
+}
+
+/* ==========================================
+   ABAS DESABILITADAS
+========================================== */
+
+ion-tab-button[disabled] {
+  opacity: 1;
+}
+
+/* ==========================================
+   RESPONSIVIDADE PARA TABLETS E DESKTOP
+========================================== */
+
+@media (min-width: 768px) {
+
+  ion-tab-bar {
+    height: 76px;
+    padding: 8px 12px;
+  }
+
+  ion-tab-button {
+    flex: 0 1 115px;
+    max-width: 115px;
 
     ion-icon {
-        font-size: 25px;
-        margin-bottom: 4px;
+      font-size: 26px;
     }
 
     ion-label {
-        font-size: 12px;
+      font-size: 13px;
     }
+  }
 }
 
-/* Manter visíveis as abas futuras */
+/* ==========================================
+   RESPONSIVIDADE PARA MOBILE
+========================================== */
 
-ion-tab-button[disabled] {
-    opacity: 1;
+@media (max-width: 767px) {
+
+  ion-tab-bar {
+    height: 70px;
+    padding: 6px 4px;
+  }
+
+  ion-tab-button {
+    flex: 1 1 0;
+    max-width: 105px;
+
+    ion-icon {
+      font-size: 25px;
+    }
+
+    ion-label {
+      font-size: 12px;
+    }
+  }
+}
+
+/* ==========================================
+   CELULARES MENORES
+========================================== */
+
+@media (max-width: 360px) {
+
+  ion-tab-bar {
+    padding: 6px 2px;
+  }
+
+  ion-tab-button {
+    ion-icon {
+      font-size: 22px;
+    }
+
+    ion-label {
+      font-size: 11px;
+    }
+  }
 }
